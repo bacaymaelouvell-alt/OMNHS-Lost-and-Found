@@ -28,7 +28,7 @@
 <button id="loginNavBtn" class="btn btn-outline" type="button">Log in</button><button id="logoutBtn" class="btn btn-outline hidden" type="button">Log out</button>
 </nav></header>
 <main>
-<section class="hero"><div class="hero-copy"><p class="eyebrow">A SCHOOL COMMUNITY SERVICE</p><h1>Lost something?<br><span>Let's find it together.</span></h1><p class="hero-description">A simple and secure place for students, teachers, and school staff to report lost belongings and return found items.</p><div class="hero-actions"><a class="btn btn-light" href="#browse">Browse items</a><a class="btn btn-ghost" href="#report">Report an item</a></div></div>
+< class="hero"><div class="hero-copy"><p class="eyebrow">A SCHOOL COMMUNITY SERVICE</p><h1>Lost something?<br><span>Let's find it together.</span></h1><p class="hero-description">A simple and secure place for students, teachers, and school staff to report lost belongings and return found items.</p><div class="hero-actions"><a class="btn btn-light" href="#browse">Browse items</a><a class="btn btn-ghost" href="#report">Report an item</a></div></div>
 <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-card"><span class="hero-icon">🎒</span><strong>Found something?</strong><small>Help it find its owner.</small></div><span class="float-item float-one">🔑</span><span class="float-item float-two">📚</span><span class="float-item float-three">💧</span></div></section>
 <section class="stats" aria-label="Portal statistics"><article><span class="stat-icon">📦</span><div><strong id="statTotal">—</strong><small>All reports</small></div></article><article><span class="stat-icon">🔎</span><div><strong id="statLost">—</strong><small>Lost items</small></div></article><article><span class="stat-icon">🤝</span><div><strong id="statFound">—</strong><small>Found items</small></div></article><article><span class="stat-icon">✅</span><div><strong id="statReturned">—</strong><small>Returned</small></div></article></section>
 <section id="browse" class="section"><div class="section-heading"><div><p class="eyebrow">ITEM DIRECTORY</p><h2>Browse reported items</h2><p class="muted">Look through recent lost and found reports.</p></div><button id="refreshBtn" class="btn btn-outline" type="button">↻ Refresh</button></div>
@@ -45,67 +45,92 @@
 <div id="photoPreviewWrap" class="hidden"><img id="photoPreview" class="photo-preview" alt="Selected item photo preview"><button id="removePhoto" class="btn btn-outline" type="button">Remove photo</button></div>
 <button class="btn btn-primary btn-wide" type="submit">Submit report</button><p id="reportMessage" class="form-message" role="status"></p>
 </form></div></section>
-<section id="account" class="section account-section hidden"><div class="section-heading"><div><p class="eyebrow">YOUR ACCOUNT</p><h2>My reports & claims</h2></div></div><div id="myReports" class="my-reports"></div>
-<div id="adminPanel" class="admin-panel hidden"><div class="section-heading"><div><p class="eyebrow">ADMINISTRATION</p><h2>Admin Dashboard</h2><p class="muted">Review student submissions and claim requests.</p></div><span class="pill returned">Administrator</span></div>
-<div class="stats admin-stats" style="margin:18px 0 26px;max-width:none;padding:18px;grid-template-columns:repeat(3,1fr)"><article><span class="stat-icon">🕒</span><div><strong id="adminPendingCount">0</strong><small>Pending reports</small></div></article><article><span class="stat-icon">📋</span><div><strong id="adminReviewedCount">0</strong><small>Reviewed reports</small></div></article><article><span class="stat-icon">🤝</span><div><strong id="adminClaimsCount">0</strong><small>Pending claims</small></div></article></div>
-<h3>Reports awaiting review</h3><div id="adminQueue" class="admin-queue"></div><h3 style="margin-top:28px">Claim requests</h3><div id="adminClaims" class="admin-queue"></div><p id="adminMessage" class="form-message" role="status"></p>
-</div></section></main>
-<section id="about" class="team-section"><div class="team-intro"><p class="eyebrow">ABOUT THE PROJECT</p><h2>Meet the Development Team</h2><p class="muted">Created by STEM 12-1 students to make reporting and returning lost belongings easier within the OMNHS community.</p></div>
-<div id="teamAdminNote" class="team-admin-note hidden">Administrator mode: update team names and photos below. Changes are saved to the website's Firebase database.</div><div id="groupPhotoWrap" class="team-group-photo hidden"><img id="groupPhoto" alt="Development team group photo"></div><
-<div id="teamGrid" class="team-grid">
 
-  <article class="team-card">
-    <div class="team-avatar">
-      <img
-        src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/1ff449f8-140d-40c8-8444-3133dc6b2892.jpg"
-        alt="Aris Christopher L. Esteron"
-        loading="lazy">
-    </div>
-    <div class="team-info">
-      <h3>Aris Christopher L. Esteron</h3>
-      <p>Project Team Member</p>
-      <p>STEM 12-1</p>
-    </div>
-  </article>
+<section id="about" class="team-section">
+  <div class="team-intro">
+    <p class="eyebrow">ABOUT THE PROJECT</p>
+    <h2>Meet the Development Team</h2>
+    <p class="muted">
+      Created by STEM 12-1 students to make reporting and returning lost
+      belongings easier within the OMNHS community.
+    </p>
+  </div>
 
-  <article class="team-card">
-    <div class="team-avatar">
-      <img
-        src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/30ffb4ce-0e8d-49c2-86b0-0888a59faa67.jpg"
-        alt="Shane Jillian D. Balboa"
-        loading="lazy">
-    </div>
-    <div class="team-info">
-      <h3>Shane Jillian D. Balboa</h3>
-      <p>Project Team Member</p>
-      <p>STEM 12-1</p>
-    </div>
-  </article>
+  <div id="teamGrid" class="team-grid">
 
-  <article class="team-card">
-    <div class="team-avatar">
-      <img
-        src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/a58fa861-6a7f-4584-a8b3-cb9e3ae15167.jpg"
-        alt="Johann Josef T. Reyes"
-        loading="lazy">
-    </div>
-    <div class="team-info">
-      <h3>Johann Josef T. Reyes</h3>
-      <p>Project Team Member</p>
-      <p>STEM 12-1</p>
-    </div>
-  </article>
+    <article class="team-card">
+      <div class="team-avatar">
+        <img
+          src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/1ff449f8-140d-40c8-8444-3133dc6b2892.jpg"
+          alt="Aris Christopher L. Esteron"
+          loading="lazy">
+      </div>
+      <div class="team-info">
+        <h3>Aris Christopher L. Esteron</h3>
+        <p>Project Team Member</p>
+        <p>STEM 12-1</p>
+      </div>
+    </article>
 
-  <article class="team-card">
-    <div class="team-avatar">
-      <img
-        src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/ca8eb7f3-9c5d-4ae2-b6dd-07536a24815f.jpg"
-        alt="Sammick Norice T. Peralta"
-        loading="lazy">
-    </div>
-    <div class="team-info">
-      <h3>Sammick Norice T. Peralta</h3>
-      <p>Project Team Member</
+    <article class="team-card">
+      <div class="team-avatar">
+        <img
+          src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/30ffb4ce-0e8d-49c2-86b0-0888a59faa67.jpg"
+          alt="Shane Jillian D. Balboa"
+          loading="lazy">
+      </div>
+      <div class="team-info">
+        <h3>Shane Jillian D. Balboa</h3>
+        <p>Project Team Member</p>
+        <p>STEM 12-1</p>
+      </div>
+    </article>
+
+    <article class="team-card">
+      <div class="team-avatar">
+        <img
+          src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/a58fa861-6a7f-4584-a8b3-cb9e3ae15167.jpg"
+          alt="Johann Josef T. Reyes"
+          loading="lazy">
+      </div>
+      <div class="team-info">
+        <h3>Johann Josef T. Reyes</h3>
+        <p>Project Team Member</p>
+        <p>STEM 12-1</p>
+      </div>
+    </article>
+
+    <article class="team-card">
+      <div class="team-avatar">
+        <img
+          src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/ca8eb7f3-9c5d-4ae2-b6dd-07536a24815f.jpg"
+          alt="Sammick Norice T. Peralta"
+          loading="lazy">
+      </div>
+      <div class="team-info">
+        <h3>Sammick Norice T. Peralta</h3>
+        <p>Project Team Member</p>
+        <p>STEM 12-1</p>
+      </div>
+    </article>
+
+    <article class="team-card">
+      <div class="team-avatar">
+        <img
+          src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/e0bd0acd-d1f2-4519-b183-9c378472d6a8.jpg"
+          alt="Excelsis Andrew T. Arriola"
+          loading="lazy">
+      </div>
+      <div class="team-info">
+        <h3>Excelsis Andrew T. Arriola</h3>
+        <p>Project Team Member</p>
+        <p>STEM 12-1</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+  
 <div id="teamAdminTools" class="team-admin-note hidden"><label style="display:grid;gap:8px;font-weight:700">Optional group photo<input id="groupPhotoInput" type="file" accept="image/*"></label><div class="team-edit-actions" style="margin-top:10px"><button id="saveGroupPhoto" class="btn btn-primary" type="button">Save group photo</button><button id="removeGroupPhoto" class="btn btn-outline" type="button">Remove group photo</button></div><p id="teamMessage" class="team-message" role="status"></p></div></section>
 <footer><div class="footer-brand"><span class="brand-mark">OM</span><strong>Occidental Mindoro National High School</strong></div><p>Lost and Found Portal · Helping our school community look after one another.</p><small>For safety, arrange item returns through the school's designated office or staff member.</small></footer>
 <div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal-card"><button class="modal-close" id="closeAuth" aria-label="Close" type="button">×</button><p class="eyebrow">WELCOME</p><h2 id="authTitle">Log in to your account</h2><div class="tab-row auth-tabs"><button class="tab active" data-auth="login" type="button">Log in</button><button class="tab" data-auth="signup" type="button">Create account</button></div>
