@@ -76,11 +76,16 @@ const firebaseConfig = {
   measurementId: "G-XQW4S3NEEN"
 };
 
-// Paste the Supabase Project URL and Publishable key from Project Settings > API Keys.
-const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-const SUPABASE_PUBLISHABLE_KEY = "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE";
+const SUPABASE_URL = "https://pddnwauposegnrnelxbs.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Mjb_AQ4XZNMza4A4BYsMpw_d4LlHZtP";
+
+const supabaseClient = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
 const IMAGE_BUCKET = "lost-and-found-images";
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
