@@ -397,5 +397,36 @@ function init() {
 }
 init();
 </script>
+
+<!-- Independent login modal fallback -->
+<script>
+(() => {
+  const loginButton = document.getElementById("loginNavBtn");
+  const modal = document.getElementById("authModal");
+  const closeButton = document.getElementById("closeAuth");
+
+  if (!loginButton || !modal) return;
+
+  loginButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+  });
+
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+    });
+  }
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.add("hidden");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
