@@ -1,640 +1,1691 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#5b1020">
-<title>Occidental Mindoro National High School Lost and Found</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#700e2b">
+<title>OMNHS Lost and Found Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-
-:root{
-  --green:#5b1020;
-  --green2:#7a1f35;
-  --mint:#f6e9ed;
-  --gold:#e8bd62;
-  --ink:#2d2024;
-  --muted:#796970;
-  --line:#eadde1;
-  --paper:#fff;
-  --bg:#f7faf7;
-  --shadow:0 18px 50px rgba(91,16,32,.11);
+:root {
+  --maroon:#700e2b;
+  --maroon-dark:#4b071b;
+  --maroon-light:#8b1c3d;
+  --gold:#d9b15f;
+  --bg:#f6f2f3;
+  --card:#ffffff;
+  --text:#302329;
+  --muted:#776970;
+  --border:#eadde1;
+  --soft:#f5e9ed;
+  --shadow:0 10px 30px rgba(75,8,27,.08);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
-button,input,textarea,select{font:inherit}
-a{color:inherit;text-decoration:none}
-.hidden{display:none!important}
-
-.site-header{
-  min-height:82px;padding:12px max(5vw,24px);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:20px;background:#fff;border-bottom:1px solid var(--line);
-  position:sticky;top:0;z-index:10
-}
-.brand,.footer-brand{display:flex;align-items:center;gap:12px}
-.brand-mark{
-  width:42px;height:42px;border-radius:13px;background:var(--green);
-  color:#fff;display:grid;place-items:center;
-  font-family:Manrope;font-weight:800;letter-spacing:-1px;flex-shrink:0
-}
-.brand strong{font-size:11px;letter-spacing:.07em;display:block}
-.brand small{display:block;color:var(--green2);font-size:10px;letter-spacing:.17em;margin-top:4px}
-.nav{display:flex;align-items:center;gap:22px;font-size:13px;font-weight:600}
-.nav a:hover{color:var(--green2)}
-
-.btn{
-  border:0;border-radius:10px;padding:12px 18px;font-weight:700;
-  font-size:13px;cursor:pointer;display:inline-flex;align-items:center;
-  justify-content:center;transition:.2s
-}
-.btn:hover{transform:translateY(-1px)}
-.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.btn-primary{background:var(--green);color:#fff}
-.btn-primary:hover{background:var(--green2)}
-.btn-outline{border:1px solid #ddc8cf;background:#fff;color:var(--green)}
-.btn-light{background:#fff;color:var(--green)}
-.btn-ghost{border:1px solid rgba(255,255,255,.5);color:#fff;background:transparent}
-.btn-wide{width:100%;margin-top:8px}
-
-.hero{
-  min-height:460px;background:var(--green);color:#fff;
-  padding:76px max(8vw,28px);display:flex;align-items:center;
-  justify-content:space-between;overflow:hidden;position:relative
-}
-.hero:after{
-  content:"";position:absolute;width:600px;height:600px;
-  border-radius:50%;border:1px solid rgba(255,255,255,.08);
-  right:-100px;top:-250px
-}
-.hero-copy{max-width:590px;position:relative;z-index:1}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;color:#c99e49;margin:0 0 14px}
-.hero h1{font:800 clamp(38px,5vw,62px)/1.12 Manrope;margin:0;letter-spacing:-.05em}
-.hero h1 span{color:#f0d9e0}
-.hero-description{max-width:510px;color:#ead2d9;line-height:1.8;font-size:15px;margin:22px 0 28px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-art{width:340px;height:300px;position:relative;margin-right:7%;display:grid;place-items:center}
-.orbit{position:absolute;border:1px solid rgba(255,255,255,.18);border-radius:50%}
-.orbit-one{width:290px;height:290px}
-.orbit-two{width:220px;height:220px}
-.hero-card{
-  background:#fff;color:var(--ink);width:190px;height:180px;
-  border-radius:22px;box-shadow:0 25px 70px #26071080;
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:10px;transform:rotate(-5deg);z-index:1
-}
-.hero-icon{font-size:50px}
-.hero-card strong{font:700 15px Manrope}
-.hero-card small{font-size:11px;color:var(--muted)}
-.float-item{position:absolute;background:#fff;border-radius:14px;padding:12px;font-size:25px;box-shadow:var(--shadow)}
-.float-one{top:28px;right:30px}
-.float-two{bottom:25px;left:10px}
-.float-three{bottom:36px;right:8px}
-
-.stats{
-  max-width:1120px;margin:-30px auto 0;position:relative;z-index:2;
-  display:grid;grid-template-columns:repeat(4,1fr);background:#fff;
-  border-radius:17px;box-shadow:var(--shadow);padding:23px 30px
-}
-.stats article{display:flex;align-items:center;gap:14px;border-right:1px solid var(--line);padding-left:22px}
-.stats article:first-child{padding-left:0}
-.stats article:last-child{border:0}
-.stat-icon{width:43px;height:43px;border-radius:13px;background:var(--mint);display:grid;place-items:center;font-size:20px}
-.stats strong{display:block;font:800 23px Manrope}
-.stats small{color:var(--muted);font-size:11px}
-
-.section{max-width:1120px;margin:90px auto;padding:0 24px}
-.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px;gap:15px}
-.section h2{font:800 34px Manrope;letter-spacing:-.04em;margin:0 0 8px}
-.muted{color:var(--muted);font-size:13px;line-height:1.7}
-
-.toolbar{display:flex;gap:12px;margin-bottom:22px}
-.search-box{
-  flex:1;display:flex;align-items:center;gap:10px;background:#fff;
-  border:1px solid var(--line);border-radius:10px;padding:0 14px
-}
-.search-box span{font-size:24px;color:var(--muted)}
-.search-box input{border:0;outline:0;width:100%;padding:13px 0}
-.toolbar select{border:1px solid var(--line);background:#fff;border-radius:10px;padding:0 13px;color:var(--ink)}
-
-.items-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.item-card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 5px 18px rgba(91,16,32,.045)}
-.item-photo{height:175px;background:#f4e9ed;display:grid;place-items:center;color:#b39da5;font-size:42px;overflow:hidden}
-.item-photo img{width:100%;height:100%;object-fit:cover}
-.item-body{padding:17px}
-.item-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.pill{font-size:10px;font-weight:700;padding:6px 9px;border-radius:20px;background:#f6e9ed;color:var(--green2);text-transform:uppercase;letter-spacing:.06em}
-.pill.lost{background:#f8eee9;color:#9a5b35}
-.pill.returned{background:#f2dfe5;color:#7a1f35}
-.item-body h3{font:700 17px Manrope;margin:13px 0 6px}
-.item-body p{font-size:12px;color:var(--muted);line-height:1.6;margin:5px 0}
-.item-meta{font-size:11px;color:#8c7b81;margin-top:12px}
-.item-actions{display:flex;gap:8px;margin-top:14px}
-.item-actions button{flex:1}
-.empty-state{
-  grid-column:1/-1;background:#fff;border:1px dashed #ddc8cf;
-  border-radius:14px;text-align:center;padding:35px;color:var(--muted);font-size:13px
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-.report-section{
-  display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:start;
-  background:#f7edf0;padding:48px;border-radius:22px;max-width:1120px
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
-.report-intro{padding:20px 0}
-.report-intro h2{font-size:37px}
-.report-panel{background:#fff;padding:25px;border-radius:16px;box-shadow:var(--shadow)}
-.tab-row{display:flex;gap:5px;background:#f8eef1;padding:5px;border-radius:10px;margin-bottom:20px}
-.tab{flex:1;border:0;background:transparent;padding:10px;border-radius:7px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer}
-.tab.active{background:#fff;color:var(--green);box-shadow:0 2px 8px #5b102010}
-.report-panel form,.modal-card form{display:grid;gap:14px}
-.report-panel label,.modal-card label{font-size:11px;font-weight:700;color:#66545a;display:grid;gap:7px}
-.report-panel input,.report-panel textarea,.report-panel select,
-.modal-card input,.modal-card textarea,.modal-card select{
-  width:100%;border:1px solid var(--line);border-radius:8px;
-  padding:11px 12px;outline:none;background:#fff;color:var(--ink);font-size:12px
+
+button,input,select,textarea {
+  font:inherit;
 }
-.report-panel input:focus,.report-panel textarea:focus,
-.modal-card input:focus,.modal-card textarea:focus{border-color:var(--green2)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-message{font-size:12px;color:var(--green2);min-height:15px;margin:0}
-.photo-preview{width:100%;max-height:220px;object-fit:contain;border-radius:10px;background:#f6e9ed}
-.photo-help{font-size:11px;color:var(--muted);font-weight:400}
 
-.account-section{margin-top:70px}
-.my-reports{display:grid;gap:12px}
-.my-report-row,.admin-row{
-  background:#fff;border:1px solid var(--line);border-radius:12px;
-  padding:15px;display:flex;align-items:center;justify-content:space-between;gap:15px
+button {
+  cursor:pointer;
 }
-.admin-panel{margin-top:35px;background:#f7edf0;border-radius:15px;padding:24px}
-.admin-panel h3{font-family:Manrope}
-.admin-queue{display:grid;gap:10px}
 
-.team-section{max-width:1120px;margin:90px auto;padding:0 24px}
-.team-intro{text-align:center;max-width:680px;margin:0 auto 28px}
-.team-intro h2{font:800 34px Manrope;letter-spacing:-.04em;margin:0 0 8px}
-.team-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.team-card{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;text-align:center;box-shadow:0 5px 18px rgba(91,16,32,.045)}
-.team-avatar{height:175px;background:#f6e9ed;display:grid;place-items:center;color:#9b7f89;font-size:48px;overflow:hidden}
-.team-avatar img{width:100%;height:100%;object-fit:cover}
-.team-info{padding:15px 10px 17px}
-.team-info h3{font:700 14px/1.45 Manrope;margin:0 0 7px}
-.team-info p{font-size:11px;color:var(--muted);margin:5px 0}
-
-footer{background:var(--green);color:#fff;padding:35px 24px;text-align:center;margin-top:90px}
-footer .footer-brand{justify-content:center}
-footer .brand-mark{background:#fff;color:var(--green)}
-footer p{font-size:12px;color:#e8cbd3;margin:15px 0 8px}
-footer small{font-size:10px;color:#d8b8c2}
-
-.modal{position:fixed;inset:0;background:#260710a8;display:grid;place-items:center;padding:20px;z-index:20}
-.modal-card{width:min(100%,440px);background:#fff;border-radius:18px;padding:30px;position:relative;box-shadow:0 25px 80px #0003}
-.modal-card h2{font:800 25px Manrope;margin:0 0 18px}
-.modal-close{position:absolute;right:17px;top:12px;border:0;background:transparent;font-size:27px;color:var(--muted);cursor:pointer}
-.auth-tabs{margin-bottom:18px}
-.toast{
-  position:fixed;bottom:22px;right:22px;background:#5b1020;color:#fff;
-  padding:13px 18px;border-radius:10px;font-size:12px;box-shadow:var(--shadow);
-  opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s;z-index:30
+a {
+  text-decoration:none;
+  color:inherit;
 }
-.toast.show{opacity:1;transform:translateY(0)}
 
-@media(max-width:800px){
-  .site-header{height:auto;flex-wrap:wrap;padding:14px 20px}
-  .brand strong{font-size:9px}
-  .nav{gap:12px;font-size:11px;flex-wrap:wrap}
-  .hero{padding:60px 25px;min-height:420px}
-  .hero-art{display:none}
-  .stats{margin:15px 18px 0;padding:18px 12px;grid-template-columns:repeat(2,1fr);gap:15px}
-  .stats article{padding:0;border:0}
-  .stats strong{font-size:20px}
-  .section{margin:65px auto}
-  .items-grid{grid-template-columns:repeat(2,1fr)}
-  .report-section{margin:50px 18px;padding:25px;grid-template-columns:1fr;gap:15px}
-  .report-intro{padding:0}
-  .report-intro h2{font-size:30px}
-  .toolbar{flex-wrap:wrap}
-  .search-box{flex-basis:100%}
-  .toolbar select{flex:1;padding:12px}
-  .section-heading{align-items:start;gap:12px}
-  .section h2{font-size:28px}
-  .team-grid{grid-template-columns:repeat(3,1fr)}
+.hidden {
+  display:none!important;
 }
-@media(max-width:520px){
-  .brand-mark{width:36px;height:36px}
-  .brand strong{max-width:220px;line-height:1.4}
-  .nav{width:100%;justify-content:flex-end}
-  .nav a:first-child{margin-right:auto}
-  .hero h1{font-size:39px}
-  .hero-description{font-size:13px}
-  .items-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .stats{gap:12px}
-  .stats article{gap:8px}
-  .stat-icon{width:36px;height:36px}
-  .stats strong{font-size:18px}
-  .stats small{font-size:10px}
-  .section-heading{flex-direction:column}
-  .report-panel{padding:18px}
-  .my-report-row,.admin-row{align-items:flex-start;flex-direction:column}
-  .team-grid{grid-template-columns:repeat(2,1fr)}
-  .team-avatar{height:145px}
-  .team-intro h2{font-size:28px}
+
+/* HEADER */
+
+.government-bar {
+  background:var(--maroon-dark);
+  color:white;
+  padding:11px 25px;
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+}
+
+.header {
+  background:var(--maroon);
+  color:white;
+  min-height:110px;
+  padding:15px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.header-left {
+  display:flex;
+  align-items:center;
+  gap:15px;
+  min-width:0;
+}
+
+.menu-button {
+  background:#ffffff15;
+  border:1px solid #ffffff55;
+  color:white;
+  border-radius:12px;
+  width:55px;
+  height:55px;
+  font-size:28px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:white;
+}
+
+.logo {
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:white;
+  border:4px double var(--gold);
+  color:var(--maroon);
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  font-weight:800;
+  flex-shrink:0;
+}
+
+.brand h1 {
+  font-family:Manrope,sans-serif;
+  font-size:clamp(15px,2vw,25px);
+  line-height:1.3;
+}
+
+.brand p {
+  font-size:13px;
+  margin-top:5px;
+  color:#f1dce3;
+}
+
+.header-actions {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.header-pill {
+  background:#ffffff12;
+  color:white;
+  border:1px solid #ffffff70;
+  border-radius:30px;
+  padding:12px 18px;
+  font-weight:700;
+}
+
+.profile-wrap {
+  position:relative;
+}
+
+.profile-button {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile-icon {
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:var(--gold);
+  color:var(--maroon-dark);
+  display:grid;
+  place-items:center;
+}
+
+.profile-menu {
+  position:absolute;
+  right:0;
+  top:55px;
+  width:210px;
+  background:white;
+  color:var(--maroon);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:8px;
+  box-shadow:var(--shadow);
+  z-index:30;
+}
+
+.profile-menu button {
+  width:100%;
+  padding:12px;
+  border:0;
+  background:white;
+  color:var(--maroon);
+  text-align:left;
+  border-radius:8px;
+  font-weight:600;
+}
+
+.profile-menu button:hover {
+  background:var(--soft);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:285px;
+  background:white;
+  padding:25px 17px;
+  z-index:50;
+  box-shadow:10px 0 30px #0002;
+  transform:translateX(-110%);
+  transition:.3s;
+  overflow-y:auto;
+}
+
+.sidebar.open {
+  transform:translateX(0);
+}
+
+.sidebar-title {
+  color:#987d86;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  padding:15px;
+}
+
+.nav-link {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:var(--maroon);
+  font-weight:700;
+  text-align:left;
+  margin-bottom:5px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background:var(--soft);
+}
+
+.overlay {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:40;
+}
+
+.overlay.show {
+  display:block;
+}
+
+/* BUTTONS */
+
+.btn {
+  padding:12px 19px;
+  border:0;
+  border-radius:9px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btn:hover {
+  transform:translateY(-2px);
+}
+
+.btn-primary {
+  background:var(--maroon);
+  color:white;
+}
+
+.btn-primary:hover {
+  background:var(--maroon-light);
+}
+
+.btn-gold {
+  background:var(--gold);
+  color:#381c23;
+}
+
+.btn-outline {
+  background:white;
+  color:var(--maroon);
+  border:1px solid var(--border);
+}
+
+.btn-white {
+  background:white;
+  color:var(--maroon);
+}
+
+.btn-ghost {
+  background:transparent;
+  color:white;
+  border:1px solid #ffffff90;
+}
+
+.btn-wide {
+  width:100%;
+}
+
+/* PAGE NAVIGATION */
+
+.page {
+  display:none;
+  min-height:65vh;
+}
+
+.page.active {
+  display:block;
+}
+
+.container {
+  max-width:1200px;
+  margin:auto;
+  padding:45px 25px;
+}
+
+.page-heading {
+  margin-bottom:25px;
+}
+
+.page-heading h2 {
+  font:800 32px Manrope,sans-serif;
+  color:var(--maroon);
+  margin-bottom:8px;
+}
+
+.page-heading p {
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.eyebrow {
+  color:#ad8740;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+/* HOME */
+
+.hero {
+  margin:40px 2%;
+  padding:70px 45px;
+  min-height:400px;
+  border-radius:25px;
+  color:white;
+  background:linear-gradient(115deg,#53091f,#78102f 65%,#941b40);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+
+.hero:after {
+  content:"";
+  position:absolute;
+  width:450px;
+  height:450px;
+  border:35px solid #ffffff0d;
+  border-radius:50%;
+  right:-100px;
+  top:-180px;
+}
+
+.hero-content {
+  max-width:750px;
+  position:relative;
+  z-index:2;
+}
+
+.hero h2 {
+  font:800 clamp(38px,5vw,65px)/1.15 Manrope,sans-serif;
+  margin-bottom:20px;
+}
+
+.hero p {
+  color:#f3dce4;
+  font-size:17px;
+  line-height:1.7;
+  max-width:700px;
+  margin-bottom:25px;
+}
+
+.hero-buttons {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin:30px 2%;
+}
+
+.stat-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  box-shadow:var(--shadow);
+}
+
+.stat-icon {
+  width:48px;
+  height:48px;
+  border-radius:12px;
+  background:var(--soft);
+  display:grid;
+  place-items:center;
+  font-size:22px;
+}
+
+.stat-card strong {
+  display:block;
+  font:800 25px Manrope;
+}
+
+.stat-card small {
+  color:var(--muted);
+  font-size:12px;
+}
+
+.service-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-top:25px;
+}
+
+.service-card {
+  text-align:left;
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:15px;
+  box-shadow:var(--shadow);
+  color:var(--text);
+  transition:.2s;
+}
+
+.service-card:hover {
+  transform:translateY(-4px);
+}
+
+.service-card .service-icon {
+  font-size:30px;
+  margin-bottom:15px;
+}
+
+.service-card h3 {
+  font:700 18px Manrope;
+  color:var(--maroon);
+  margin-bottom:10px;
+}
+
+.service-card p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* GENERAL CARDS */
+
+.card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.card h3 {
+  font:700 20px Manrope;
+  color:var(--maroon);
+  margin-bottom:15px;
+}
+
+.muted {
+  color:var(--muted);
+}
+
+/* BROWSE ITEMS */
+
+.toolbar {
+  display:flex;
+  gap:12px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.toolbar input,
+.toolbar select {
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--card);
+  color:var(--text);
+}
+
+.toolbar input {
+  flex:1;
+  min-width:220px;
+}
+
+.items-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.item-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+
+.item-photo {
+  height:180px;
+  background:var(--soft);
+  display:grid;
+  place-items:center;
+  font-size:45px;
+}
+
+.item-photo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.item-body {
+  padding:18px;
+}
+
+.item-body h3 {
+  font:700 18px Manrope;
+  margin:12px 0 8px;
+}
+
+.item-body p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  margin:6px 0;
+}
+
+.pill {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  background:var(--soft);
+  color:var(--maroon);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.item-actions {
+  display:flex;
+  gap:8px;
+  margin-top:15px;
+}
+
+.empty-state {
+  grid-column:1/-1;
+  padding:35px;
+  background:var(--card);
+  border:1px dashed var(--border);
+  border-radius:12px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* FORMS */
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group {
+  display:grid;
+  gap:7px;
+  margin-bottom:15px;
+}
+
+.form-group.full {
+  grid-column:1/-1;
+}
+
+.form-group label {
+  font-size:13px;
+  font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width:100%;
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:var(--card);
+  color:var(--text);
+}
+
+.form-group textarea {
+  resize:vertical;
+}
+
+.tabs {
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.tab {
+  flex:1;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:var(--soft);
+  color:var(--maroon);
+  font-weight:700;
+}
+
+.tab.active {
+  background:var(--maroon);
+  color:white;
+}
+
+.form-message {
+  color:var(--maroon);
+  font-size:13px;
+  margin-top:12px;
+  line-height:1.5;
+}
+
+/* ACCOUNT AND ADMIN */
+
+.profile-info p {
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  font-size:14px;
+}
+
+.report-row,
+.admin-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.report-row p,
+.admin-row p {
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+
+.admin-stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin:25px 0;
+}
+
+.admin-stat {
+  background:var(--card);
+  padding:22px;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.admin-stat strong {
+  display:block;
+  font:800 27px Manrope;
+  color:var(--maroon);
+}
+
+.admin-stat small {
+  color:var(--muted);
+}
+
+.section-gap {
+  margin-top:35px;
+}
+
+/* ABOUT */
+
+.team-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  margin-top:25px;
+}
+
+.team-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:22px;
+}
+
+.team-card h3 {
+  color:var(--maroon);
+  font:700 16px Manrope;
+}
+
+.team-card p {
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+}
+
+/* MODALS */
+
+.modal {
+  position:fixed;
+  inset:0;
+  background:#0009;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal-card {
+  background:var(--card);
+  color:var(--text);
+  width:min(450px,100%);
+  padding:28px;
+  border-radius:16px;
+  position:relative;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.modal-card h2 {
+  color:var(--maroon);
+  font:800 24px Manrope;
+  margin-bottom:20px;
+}
+
+.modal-close {
+  position:absolute;
+  right:15px;
+  top:12px;
+  background:none;
+  border:0;
+  font-size:27px;
+  color:var(--muted);
+}
+
+.modal-card form {
+  display:grid;
+  gap:14px;
+}
+
+.modal-card label {
+  display:grid;
+  gap:7px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.modal-card input,
+.modal-card textarea {
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:var(--card);
+  color:var(--text);
+}
+
+/* FOOTER */
+
+footer {
+  background:var(--maroon-dark);
+  color:white;
+  text-align:center;
+  padding:30px 20px;
+  margin-top:70px;
+}
+
+footer p {
+  color:#e7cbd4;
+  font-size:13px;
+  margin-top:10px;
+}
+
+/* DARK MODE */
+
+body.dark-mode {
+  --bg:#171116;
+  --card:#281c23;
+  --text:#f5edf0;
+  --muted:#c3afb7;
+  --border:#543541;
+  --soft:#3a2630;
+  --shadow:0 10px 30px #0004;
+}
+
+body.dark-mode .profile-menu,
+body.dark-mode .profile-menu button {
+  background:#281c23;
+  color:#f5edf0;
+}
+
+body.dark-mode .profile-menu button:hover {
+  background:#3a2630;
+}
+
+body.dark-mode .sidebar {
+  background:#281c23;
+}
+
+body.dark-mode .nav-link {
+  color:#f5edf0;
+}
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+  background:#3a2630;
+}
+
+body.dark-mode .card h3,
+body.dark-mode .service-card h3 {
+  color:#f0c8d5;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px) {
+  .stats {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .service-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .items-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .team-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero {
+    padding:55px 30px;
+  }
+}
+
+@media(max-width:600px) {
+  .government-bar {
+    font-size:10px;
+    gap:10px;
+  }
+
+  .header {
+    flex-wrap:wrap;
+    padding:12px;
+  }
+
+  .header-left {
+    width:100%;
+  }
+
+  .logo {
+    width:48px;
+    height:48px;
+    font-size:16px;
+  }
+
+  .brand h1 {
+    font-size:13px;
+  }
+
+  .brand p {
+    font-size:10px;
+  }
+
+  .header-actions {
+    width:100%;
+    justify-content:flex-end;
+  }
+
+  .header-pill {
+    padding:9px 12px;
+    font-size:11px;
+  }
+
+  .hero {
+    margin:18px 12px;
+    padding:40px 22px;
+  }
+
+  .hero h2 {
+    font-size:36px;
+  }
+
+  .hero p {
+    font-size:13px;
+  }
+
+  .stats {
+    margin:15px 12px;
+    gap:9px;
+  }
+
+  .stat-card {
+    padding:13px;
+    gap:8px;
+  }
+
+  .stat-card strong {
+    font-size:19px;
+  }
+
+  .stat-card small {
+    font-size:9px;
+  }
+
+  .service-grid,
+  .items-grid,
+  .team-grid,
+  .admin-stats {
+    grid-template-columns:1fr;
+  }
+
+  .form-grid {
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full {
+    grid-column:auto;
+  }
+
+  .report-row,
+  .admin-row {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .container {
+    padding:30px 15px;
+  }
+
+  .page-heading h2 {
+    font-size:26px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <a class="brand" href="#" aria-label="Home">
-    <span class="brand-mark">OM</span>
-    <span>
-      <strong>OCCIDENTAL MINDORO NATIONAL HIGH SCHOOL</strong>
-      <small>LOST AND FOUND PORTAL</small>
-    </span>
-  </a>
+<!-- TOP GOVERNMENT BAR -->
 
-  <nav id="mainNav" class="nav">
-    <a href="#browse">Browse Items</a>
-    <a href="#report">Report an Item</a>
-    <a href="#about">About Us</a>
-    <button id="adminNavBtn" class="btn btn-primary hidden" type="button">Admin Dashboard</button>
-    <button id="loginNavBtn" class="btn btn-outline" type="button">Log in</button>
-    <button id="logoutBtn" class="btn btn-outline hidden" type="button">Log out</button>
-  </nav>
+<div class="government-bar">
+  <span>Republic of the Philippines · Department of Education</span>
+  <span>OMNHS Lost and Found Portal</span>
+</div>
+
+<!-- MAIN HEADER -->
+
+<header class="header">
+
+  <div class="header-left">
+
+    <button class="menu-button" id="menuButton" type="button">
+      ☰
+    </button>
+
+    <a href="#" class="brand" id="logoHome">
+      <div class="logo">OM</div>
+
+      <div>
+        <h1>Occidental Mindoro National High School</h1>
+        <p>Lost and Found Portal · Helping our community</p>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="header-actions">
+
+    <button class="header-pill" id="themeButton" type="button">
+      ◐ Dark mode
+    </button>
+
+    <div class="profile-wrap">
+
+      <button class="header-pill profile-button" id="profileButton" type="button">
+        <span class="profile-icon">♟</span>
+        <span id="profileButtonName">My Profile</span>
+        <span>⌄</span>
+      </button>
+
+      <div class="profile-menu hidden" id="profileMenu">
+        <button id="openProfile" type="button">My Account</button>
+        <button id="openLogin" type="button">Log in / Register</button>
+        <button id="logoutButton" class="hidden" type="button">Log out</button>
+      </div>
+
+    </div>
+
+  </div>
+
 </header>
+
+<!-- SIDEBAR -->
+
+<div class="overlay" id="overlay"></div>
+
+<nav class="sidebar" id="sidebar">
+
+  <div class="sidebar-title">PORTAL MENU</div>
+
+  <button class="nav-link active" data-page="home">
+    🏠 <span>Home</span>
+  </button>
+
+  <button class="nav-link" data-page="browse">
+    🔎 <span>Browse Items</span>
+  </button>
+
+  <button class="nav-link" data-page="report">
+    📝 <span>Report an Item</span>
+  </button>
+
+  <button class="nav-link" data-page="myreports">
+    📋 <span>My Reports</span>
+  </button>
+
+  <button class="nav-link" data-page="account">
+    👤 <span>My Account</span>
+  </button>
+
+  <button class="nav-link hidden" id="adminNav" data-page="admin">
+    🛡️ <span>Admin Dashboard</span>
+  </button>
+
+  <button class="nav-link" data-page="about">
+    ℹ️ <span>About Us</span>
+  </button>
+
+</nav>
 
 <main>
 
-<!-- HOMEPAGE HERO -->
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">A SCHOOL COMMUNITY SERVICE</p>
-    <h1>Lost something?<br><span>Let's find it together.</span></h1>
-    <p class="hero-description">
-      A simple and secure place for students, teachers, and school staff
-      to report lost belongings and return found items.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-light" href="#browse">Browse items</a>
-      <a class="btn btn-ghost" href="#report">Report an item</a>
+<!-- ===================================== -->
+<!-- HOME DASHBOARD -->
+<!-- ===================================== -->
+
+<section class="page active" id="page-home">
+
+  <div class="hero">
+
+    <div class="hero-content">
+
+      <p class="eyebrow">A SCHOOL COMMUNITY SERVICE</p>
+
+      <h2>
+        Welcome to the OMNHS
+        Lost and Found Portal
+      </h2>
+
+      <p>
+        A convenient platform for students, teachers, and school staff
+        to report lost belongings and return found items.
+        Together, let's help our school community.
+      </p>
+
+      <div class="hero-buttons">
+
+        <button class="btn btn-gold" data-go="browse">
+          Browse Items
+        </button>
+
+        <button class="btn btn-white" data-go="report">
+          Report an Item
+        </button>
+
+      </div>
+
     </div>
+
   </div>
 
-  <div class="hero-art" aria-hidden="true">
-    <div class="orbit orbit-one"></div>
-    <div class="orbit orbit-two"></div>
-    <div class="hero-card">
-      <span class="hero-icon">🎒</span>
-      <strong>Found something?</strong>
-      <small>Help it find its owner.</small>
+  <!-- STATISTICS -->
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <div class="stat-icon">📦</div>
+      <div>
+        <strong id="totalItems">0</strong>
+        <small>Total Approved Items</small>
+      </div>
     </div>
-    <span class="float-item float-one">🔑</span>
-    <span class="float-item float-two">📚</span>
-    <span class="float-item float-three">💧</span>
+
+    <div class="stat-card">
+      <div class="stat-icon">🔎</div>
+      <div>
+        <strong id="lostItems">0</strong>
+        <small>Lost Items</small>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🎒</div>
+      <div>
+        <strong id="foundItems">0</strong>
+        <small>Found Items</small>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">✓</div>
+      <div>
+        <strong id="returnedItems">0</strong>
+        <small>Returned Items</small>
+      </div>
+    </div>
+
   </div>
+
+  <!-- PORTAL SERVICES -->
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">QUICK ACCESS</p>
+      <h2>Portal Services</h2>
+      <p>Select a service to continue.</p>
+    </div>
+
+    <div class="service-grid">
+
+      <button class="service-card" data-go="browse">
+        <div class="service-icon">🔎</div>
+        <h3>Browse Items</h3>
+        <p>Search for lost and found belongings.</p>
+      </button>
+
+      <button class="service-card" data-go="report">
+        <div class="service-icon">📝</div>
+        <h3>Report an Item</h3>
+        <p>Submit a lost or found item report.</p>
+      </button>
+
+      <button class="service-card" data-go="myreports">
+        <div class="service-icon">📋</div>
+        <h3>My Reports</h3>
+        <p>Check the status of your submissions.</p>
+      </button>
+
+      <button class="service-card" data-go="account">
+        <div class="service-icon">👤</div>
+        <h3>My Account</h3>
+        <p>View your account information.</p>
+      </button>
+
+    </div>
+
+  </div>
+
 </section>
 
-<!-- STATISTICS -->
-<section class="stats" aria-label="Lost and found statistics">
-  <article>
-    <span class="stat-icon">📦</span>
-    <div><strong id="statTotal">0</strong><small>Total approved items</small></div>
-  </article>
-  <article>
-    <span class="stat-icon">🔎</span>
-    <div><strong id="statLost">0</strong><small>Lost items</small></div>
-  </article>
-  <article>
-    <span class="stat-icon">🎒</span>
-    <div><strong id="statFound">0</strong><small>Found items</small></div>
-  </article>
-  <article>
-    <span class="stat-icon">✓</span>
-    <div><strong id="statReturned">0</strong><small>Returned items</small></div>
-  </article>
-</section>
+<!-- ===================================== -->
+<!-- BROWSE ITEMS DASHBOARD -->
+<!-- ===================================== -->
 
-<!-- BROWSE ITEMS -->
-<section id="browse" class="section">
-  <div class="section-heading">
-    <div>
+<section class="page" id="page-browse">
+
+  <div class="container">
+
+    <div class="page-heading">
       <p class="eyebrow">ITEM DIRECTORY</p>
-      <h2>Browse Lost & Found Items</h2>
-      <p class="muted">Look through approved reports submitted by the school community.</p>
+      <h2>Browse Lost and Found Items</h2>
+      <p>Look through approved reports submitted by the school community.</p>
     </div>
-    <a href="#report" class="btn btn-primary">Report an item</a>
+
+    <div class="toolbar">
+
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Search item name, description, or location..."
+      >
+
+      <select id="typeFilter">
+        <option value="all">All Types</option>
+        <option value="lost">Lost Items</option>
+        <option value="found">Found Items</option>
+      </select>
+
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option>Accessories</option>
+        <option>Bags</option>
+        <option>Books and School Supplies</option>
+        <option>Clothing</option>
+        <option>Electronics</option>
+        <option>Identification Cards</option>
+        <option>Others</option>
+      </select>
+
+    </div>
+
+    <div class="items-grid" id="itemsGrid">
+      <div class="empty-state">Loading items...</div>
+    </div>
+
   </div>
 
-  <div class="toolbar">
-    <label class="search-box">
-      <span>⌕</span>
-      <input id="searchInput" type="search" placeholder="Search item name, description, or location..." aria-label="Search items">
-    </label>
-
-    <select id="typeFilter" aria-label="Filter by report type">
-      <option value="all">All types</option>
-      <option value="lost">Lost items</option>
-      <option value="found">Found items</option>
-    </select>
-
-    <select id="categoryFilter" aria-label="Filter by category">
-      <option value="all">All categories</option>
-      <option value="Accessories">Accessories</option>
-      <option value="Bags">Bags</option>
-      <option value="Books and School Supplies">Books and School Supplies</option>
-      <option value="Clothing">Clothing</option>
-      <option value="Electronics">Electronics</option>
-      <option value="Identification Cards">Identification Cards</option>
-      <option value="Others">Others</option>
-    </select>
-  </div>
-
-  <div id="itemsGrid" class="items-grid">
-    <div class="empty-state">Loading reported items...</div>
-  </div>
 </section>
 
-<!-- REPORT ITEM -->
-<section id="report" class="section report-section">
-  <div class="report-intro">
-    <p class="eyebrow">HELP THE COMMUNITY</p>
-    <h2>Lost something or found an item?</h2>
-    <p class="muted">
-      Submit a report to help reconnect belongings with their owners.
-      Reports are reviewed by the designated administrator before
-      appearing publicly on the portal.
-    </p>
-    <p class="muted">
-      Please provide accurate details. Do not publish passwords,
-      private identification numbers, or other sensitive information.
-    </p>
-  </div>
+<!-- ===================================== -->
+<!-- REPORT AN ITEM DASHBOARD -->
+<!-- ===================================== -->
 
-  <div class="report-panel">
-    <div class="tab-row">
-      <button class="tab active" data-tab="lost" type="button">I lost an item</button>
-      <button class="tab" data-tab="found" type="button">I found an item</button>
+<section class="page" id="page-report">
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">HELP THE COMMUNITY</p>
+      <h2>Report a Lost or Found Item</h2>
+      <p>
+        Submit accurate information to help reconnect belongings
+        with their owners.
+      </p>
     </div>
 
-    <form id="reportForm">
-      <label>
-        Item name
-        <input id="itemName" type="text" maxlength="100" required placeholder="e.g. Black school backpack">
-      </label>
+    <div class="card">
 
-      <div class="form-row">
-        <label>
-          Category
-          <select id="itemCategory" required>
-            <option value="">Select category</option>
-            <option value="Accessories">Accessories</option>
-            <option value="Bags">Bags</option>
-            <option value="Books and School Supplies">Books and School Supplies</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Identification Cards">Identification Cards</option>
-            <option value="Others">Others</option>
-          </select>
-        </label>
+      <div class="tabs">
 
-        <label>
-          Date <span id="dateLabel">lost</span>
-          <input id="itemDate" type="date" required>
-        </label>
+        <button class="tab active" data-type="lost">
+          I Lost an Item
+        </button>
+
+        <button class="tab" data-type="found">
+          I Found an Item
+        </button>
+
       </div>
 
-      <label>
-        Location
-        <input id="itemLocation" type="text" maxlength="150" required placeholder="Where was it lost or found?">
-      </label>
+      <form id="reportForm">
 
-      <label>
-        Description
-        <textarea id="itemDescription" rows="4" maxlength="1000" required placeholder="Describe the item. Avoid including sensitive identifying details."></textarea>
-      </label>
+        <div class="form-grid">
 
-      <label>
-        Item photo (optional)
-        <input id="itemPhoto" type="file" accept="image/jpeg,image/png,image/webp">
-        <span class="photo-help">JPG, PNG, or WebP. Maximum file size: 5 MB.</span>
-      </label>
+          <div class="form-group full">
+            <label>Item Name</label>
+            <input
+              id="itemName"
+              maxlength="100"
+              required
+              placeholder="Example: Black school backpack"
+            >
+          </div>
 
-      <div id="photoPreviewWrap" class="hidden">
-        <img id="photoPreview" class="photo-preview" alt="Selected item photo preview">
-        <button id="removePhoto" class="btn btn-outline" type="button">Remove photo</button>
-      </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="itemCategory" required>
+              <option value="">Select Category</option>
+              <option>Accessories</option>
+              <option>Bags</option>
+              <option>Books and School Supplies</option>
+              <option>Clothing</option>
+              <option>Electronics</option>
+              <option>Identification Cards</option>
+              <option>Others</option>
+            </select>
+          </div>
 
-      <button class="btn btn-primary btn-wide" type="submit">Submit report</button>
-      <p id="reportMessage" class="form-message" role="status"></p>
-      <p class="photo-help">You must be logged in to submit a report.</p>
-    </form>
+          <div class="form-group">
+            <label>Date <span id="dateLabel">Lost</span></label>
+            <input id="itemDate" type="date" required>
+          </div>
+
+          <div class="form-group full">
+            <label>Location</label>
+            <input
+              id="itemLocation"
+              maxlength="150"
+              required
+              placeholder="Where was the item lost or found?"
+            >
+          </div>
+
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea
+              id="itemDescription"
+              rows="4"
+              maxlength="1000"
+              required
+              placeholder="Describe the item..."
+            ></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label>Item Photo (Optional)</label>
+            <input
+              id="itemPhoto"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+            >
+            <small class="muted">
+              JPG, PNG, or WebP. Maximum size: 5 MB.
+            </small>
+          </div>
+
+          <div class="form-group full hidden" id="previewWrap">
+            <img
+              id="photoPreview"
+              style="max-width:100%;max-height:220px;object-fit:contain;border-radius:10px"
+              alt="Photo preview"
+            >
+            <button class="btn btn-outline" id="removePhoto" type="button">
+              Remove Photo
+            </button>
+          </div>
+
+        </div>
+
+        <button class="btn btn-primary btn-wide" type="submit">
+          Submit Report
+        </button>
+
+        <p class="form-message" id="reportMessage"></p>
+
+        <small class="muted">
+          You must be logged in to submit a report.
+        </small>
+
+      </form>
+
+    </div>
+
   </div>
+
 </section>
 
-<!-- ACCOUNT SECTION -->
-<section id="account" class="section account-section hidden">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">MY ACCOUNT</p>
-      <h2>Welcome, <span id="profileName">Student</span>!</h2>
-      <p class="muted">View your account information and submitted reports.</p>
+<!-- ===================================== -->
+<!-- MY REPORTS DASHBOARD -->
+<!-- ===================================== -->
+
+<section class="page" id="page-myreports">
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">REPORT HISTORY</p>
+      <h2>My Reports</h2>
+      <p>Track the review status of your submitted reports.</p>
     </div>
+
+    <div id="myReports">
+      <div class="empty-state">Log in to view your reports.</div>
+    </div>
+
   </div>
 
-  <div class="report-panel">
-    <h3>Account Information</h3>
-    <p><strong>Full Name:</strong> <span id="profileDisplayName">—</span></p>
-    <p><strong>Email:</strong> <span id="profileEmail">—</span></p>
-    <p><strong>Account Type:</strong> <span id="profileRole">Student</span></p>
-    <p id="adminMessage" class="form-message" role="status"></p>
-  </div>
-
-  <div style="margin-top:30px">
-    <h3>My Reports</h3>
-    <div id="myReports" class="my-reports">
-      <div class="empty-state">Your submitted reports will appear here.</div>
-    </div>
-  </div>
 </section>
 
+<!-- ===================================== -->
+<!-- MY ACCOUNT DASHBOARD -->
+<!-- ===================================== -->
+
+<section class="page" id="page-account">
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">ACCOUNT SETTINGS</p>
+      <h2>My Account</h2>
+      <p>View your account information.</p>
+    </div>
+
+    <div class="card profile-info">
+
+      <h3>Account Information</h3>
+
+      <p>
+        <strong>Full Name:</strong>
+        <span id="profileName">—</span>
+      </p>
+
+      <p>
+        <strong>Email Address:</strong>
+        <span id="profileEmail">—</span>
+      </p>
+
+      <p>
+        <strong>Account Type:</strong>
+        <span id="profileRole">Student</span>
+      </p>
+
+      <p id="accountMessage" class="form-message"></p>
+
+    </div>
+
+    <button class="btn btn-primary section-gap" data-go="myreports">
+      View My Reports
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ===================================== -->
 <!-- ADMIN DASHBOARD -->
-<section id="adminPanel" class="section admin-panel hidden">
-  <p class="eyebrow">ADMINISTRATION</p>
-  <h2>Admin Dashboard</h2>
-  <p class="muted">Review submitted reports and manage item claim requests.</p>
+<!-- ===================================== -->
 
-  <div class="stats" style="margin:20px 0;max-width:none">
-    <article>
-      <span class="stat-icon">⏳</span>
-      <div><strong id="adminPendingCount">0</strong><small>Pending reports</small></div>
-    </article>
-    <article>
-      <span class="stat-icon">✓</span>
-      <div><strong id="adminReviewedCount">0</strong><small>Reviewed reports</small></div>
-    </article>
-    <article>
-      <span class="stat-icon">📩</span>
-      <div><strong id="adminClaimsCount">0</strong><small>Pending claims</small></div>
-    </article>
-    <article>
-      <span class="stat-icon">🛡️</span>
-      <div><strong>Admin</strong><small>Access level</small></div>
-    </article>
+<section class="page" id="page-admin">
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">ADMINISTRATION</p>
+      <h2>Administrator Dashboard</h2>
+      <p>Manage submitted reports and item claim requests.</p>
+    </div>
+
+    <div class="admin-stats">
+
+      <div class="admin-stat">
+        <strong id="pendingCount">0</strong>
+        <small>Pending Reports</small>
+      </div>
+
+      <div class="admin-stat">
+        <strong id="reviewedCount">0</strong>
+        <small>Reviewed Reports</small>
+      </div>
+
+      <div class="admin-stat">
+        <strong id="claimsCount">0</strong>
+        <small>Pending Claims</small>
+      </div>
+
+    </div>
+
+    <div class="section-gap">
+
+      <div class="page-heading">
+        <h2>Pending Reports</h2>
+        <p>Approve or reject submitted reports.</p>
+      </div>
+
+      <div id="adminQueue">
+        <div class="empty-state">No reports loaded.</div>
+      </div>
+
+    </div>
+
+    <div class="section-gap">
+
+      <div class="page-heading">
+        <h2>Claim Requests</h2>
+        <p>Review requests from students claiming found items.</p>
+      </div>
+
+      <div id="adminClaims">
+        <div class="empty-state">No claims loaded.</div>
+      </div>
+
+    </div>
+
   </div>
 
-  <h3>Pending Reports</h3>
-  <div id="adminQueue" class="admin-queue">
-    <div class="empty-state">No reports loaded.</div>
-  </div>
-
-  <h3 style="margin-top:30px">Claim Requests</h3>
-  <div id="adminClaims" class="admin-queue">
-    <div class="empty-state">No claims loaded.</div>
-  </div>
 </section>
 
-<!-- ABOUT AND TEAM -->
-<section id="about" class="team-section">
-  <div class="team-intro">
-    <p class="eyebrow">ABOUT THE PROJECT</p>
-    <h2>Meet the Development Team</h2>
-    <p class="muted">
-      Created by STEM 12-1 students to make reporting and returning lost
-      belongings easier within the OMNHS community.
-    </p>
+<!-- ===================================== -->
+<!-- ABOUT US DASHBOARD -->
+<!-- ===================================== -->
+
+<section class="page" id="page-about">
+
+  <div class="container">
+
+    <div class="page-heading">
+      <p class="eyebrow">ABOUT THE PROJECT</p>
+      <h2>About OMNHS Lost and Found</h2>
+      <p>
+        A school community platform designed to make reporting
+        and returning lost belongings easier.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <h3>Our Purpose</h3>
+
+      <p class="muted" style="line-height:1.8">
+        The OMNHS Lost and Found Portal provides a convenient way
+        for students and members of the school community to report
+        missing belongings and submit found-item reports.
+        It also helps connect possible owners with their belongings
+        through an administrator-reviewed process.
+      </p>
+
+    </div>
+
+    <div class="section-gap">
+
+      <div class="page-heading">
+        <h2>Development Team</h2>
+        <p>STEM 12-1</p>
+      </div>
+
+      <div class="team-grid">
+
+        <div class="team-card">
+          <h3>Aris Christopher L. Esteron</h3>
+          <p>Project Team Member</p>
+          <p>STEM 12-1</p>
+        </div>
+
+        <div class="team-card">
+          <h3>Shane Jillian D. Balboa</h3>
+          <p>Project Team Member</p>
+          <p>STEM 12-1</p>
+        </div>
+
+        <div class="team-card">
+          <h3>Johann Josef T. Reyes</h3>
+          <p>Project Team Member</p>
+          <p>STEM 12-1</p>
+        </div>
+
+        <div class="team-card">
+          <h3>Sammick Norice T. Peralta</h3>
+          <p>Project Team Member</p>
+          <p>STEM 12-1</p>
+        </div>
+
+        <div class="team-card">
+          <h3>Excelsis Andrew T. Arriola</h3>
+          <p>Project Team Member</p>
+          <p>STEM 12-1</p>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-  <div id="teamGrid" class="team-grid">
-
-    <article class="team-card">
-      <div class="team-avatar">
-        <img src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/1ff449f8-140d-40c8-8444-3133dc6b2892.jpg" alt="Aris Christopher L. Esteron" loading="lazy">
-      </div>
-      <div class="team-info">
-        <h3>Aris Christopher L. Esteron</h3>
-        <p>Project Team Member</p>
-        <p>STEM 12-1</p>
-      </div>
-    </article>
-
-    <article class="team-card">
-      <div class="team-avatar">
-        <img src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/30ffb4ce-0e8d-49c2-86b0-0888a59faa67.jpg" alt="Shane Jillian D. Balboa" loading="lazy">
-      </div>
-      <div class="team-info">
-        <h3>Shane Jillian D. Balboa</h3>
-        <p>Project Team Member</p>
-        <p>STEM 12-1</p>
-      </div>
-    </article>
-
-    <article class="team-card">
-      <div class="team-avatar">
-        <img src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/a58fa861-6a7f-4584-a8b3-cb9e3ae15167.jpg" alt="Johann Josef T. Reyes" loading="lazy">
-      </div>
-      <div class="team-info">
-        <h3>Johann Josef T. Reyes</h3>
-        <p>Project Team Member</p>
-        <p>STEM 12-1</p>
-      </div>
-    </article>
-
-    <article class="team-card">
-      <div class="team-avatar">
-        <img src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/ca8eb7f3-9c5d-4ae2-b6dd-07536a24815f.jpg" alt="Sammick Norice T. Peralta" loading="lazy">
-      </div>
-      <div class="team-info">
-        <h3>Sammick Norice T. Peralta</h3>
-        <p>Project Team Member</p>
-        <p>STEM 12-1</p>
-      </div>
-    </article>
-
-    <article class="team-card">
-      <div class="team-avatar">
-        <img src="https://pddnwauposegnrnelxbs.supabase.co/storage/v1/object/public/lost-and-found-images/team-members/e0bd0acd-d1f2-4519-b183-9c378472d6a8.jpg" alt="Excelsis Andrew T. Arriola" loading="lazy">
-      </div>
-      <div class="team-info">
-        <h3>Excelsis Andrew T. Arriola</h3>
-        <p>Project Team Member</p>
-        <p>STEM 12-1</p>
-      </div>
-    </article>
-
-  </div>
 </section>
 
 </main>
 
 <footer>
-  <div class="footer-brand">
-    <span class="brand-mark">OM</span>
-    <strong>Occidental Mindoro National High School</strong>
-  </div>
-  <p>Lost and Found Portal · Helping our school community look after one another.</p>
-  <small>For safety, arrange item returns through the school's designated office or staff member.</small>
+  <strong>Occidental Mindoro National High School</strong>
+  <p>Lost and Found Portal · Helping our school community.</p>
+  <p>For item returns, coordinate with the school's designated office or staff.</p>
 </footer>
 
-<!-- LOGIN / SIGNUP MODAL -->
-<div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-  <div class="modal-card">
-    <button class="modal-close" id="closeAuth" aria-label="Close" type="button">×</button>
-    <p class="eyebrow">WELCOME</p>
-    <h2 id="authTitle">Log in to your account</h2>
+<!-- ===================================== -->
+<!-- LOGIN AND REGISTRATION MODAL -->
+<!-- ===================================== -->
 
-    <div class="tab-row auth-tabs">
-      <button class="tab active" data-auth="login" type="button">Log in</button>
-      <button class="tab" data-auth="signup" type="button">Create account</button>
+<div class="modal hidden" id="authModal">
+
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeAuth">×</button>
+
+    <p class="eyebrow">WELCOME</p>
+    <h2 id="authTitle">Log In</h2>
+
+    <div class="tabs">
+
+      <button class="tab active" data-auth="login">
+        Log In
+      </button>
+
+      <button class="tab" data-auth="signup">
+        Register
+      </button>
+
     </div>
 
     <form id="authForm">
-      <label>Full name
-        <input id="authName" maxlength="100" placeholder="Your full name" autocomplete="name">
+
+      <label id="nameGroup" class="hidden">
+        Full Name
+        <input id="authName" maxlength="100" placeholder="Your full name">
       </label>
-      <label>Email address
-        <input id="authEmail" type="email" required autocomplete="email" placeholder="name@example.com">
+
+      <label>
+        Email Address
+        <input id="authEmail" type="email" required placeholder="name@example.com">
       </label>
-      <label>Password
-        <input id="authPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters">
+
+      <label>
+        Password
+        <input id="authPassword" type="password" required minlength="6" placeholder="At least 6 characters">
       </label>
-      <button id="authSubmit" class="btn btn-primary btn-wide" type="submit">Log in</button>
-      <p id="authMessage" class="form-message" role="status"></p>
+
+      <button class="btn btn-primary btn-wide" id="authSubmit" type="submit">
+        Log In
+      </button>
+
+      <p id="authMessage" class="form-message"></p>
+
     </form>
-    <small class="muted">Use an email address approved by your school. Never share your password.</small>
+
   </div>
+
 </div>
 
-<!-- CLAIM MODAL -->
-<div id="claimModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="claimTitle">
+<!-- ===================================== -->
+<!-- CLAIM REQUEST MODAL -->
+<!-- ===================================== -->
+
+<div class="modal hidden" id="claimModal">
+
   <div class="modal-card">
-    <button class="modal-close" id="closeClaim" aria-label="Close" type="button">×</button>
+
+    <button class="modal-close" id="closeClaim">×</button>
+
     <p class="eyebrow">ITEM CLAIM</p>
-    <h2 id="claimTitle">Request to claim this item</h2>
+    <h2>Request to Claim Item</h2>
+
     <form id="claimForm">
-      <input id="claimItemId" type="hidden">
-      <label>How can you identify this item?
-        <textarea id="claimDetails" required maxlength="500" rows="4" placeholder="Describe a detail only the owner would know. Do not include passwords or sensitive information."></textarea>
+
+      <input type="hidden" id="claimItemId">
+
+      <label>
+        How can you identify this item?
+
+        <textarea
+          id="claimDetails"
+          rows="4"
+          maxlength="500"
+          required
+          placeholder="Describe a detail only the owner would know."
+        ></textarea>
       </label>
-      <button class="btn btn-primary btn-wide" type="submit">Send claim request</button>
-      <p id="claimMessage" class="form-message" role="status"></p>
+
+      <button class="btn btn-primary btn-wide" type="submit">
+        Send Claim Request
+      </button>
+
+      <p id="claimMessage" class="form-message"></p>
+
     </form>
+
   </div>
+
 </div>
 
-<div id="toast" class="toast" role="status"></div>
+<div id="toast" class="modal-message" style="position:fixed;bottom:20px;right:20px;background:#4b071b;color:white;padding:14px 20px;border-radius:10px;display:none;z-index:150"></div>
+
+<!-- ===================================== -->
+<!-- FIREBASE AND SUPABASE -->
+<!-- ===================================== -->
 
 <script type="module">
-// --------------------------------------------------
-// FIREBASE AND SUPABASE CONFIGURATION
-// --------------------------------------------------
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
 import {
   getAuth,
@@ -659,7 +1710,10 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient }
+from "https://esm.sh/@supabase/supabase-js@2";
+
+/* FIREBASE CONFIGURATION */
 
 const firebaseConfig = {
   apiKey: "AIzaSyDb99VBcsIj92nsd9uR0ZDNkLvT8b7UbQE",
@@ -675,8 +1729,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const SUPABASE_URL = "https://pddnwauposegnrnelxbs.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_Mjb_AQ4XZNMza4A4BYsMpw_d4LlHZtP";
+/* SUPABASE CONFIGURATION */
+
+const SUPABASE_URL =
+  "https://pddnwauposegnrnelxbs.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_Mjb_AQ4XZNMza4A4BYsMpw_d4LlHZtP";
+
 const IMAGE_BUCKET = "lost-and-found-images";
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -685,9 +1745,7 @@ const supabaseClient = createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
-// --------------------------------------------------
-// APP STATE AND HELPERS
-// --------------------------------------------------
+/* APP STATE */
 
 const $ = id => document.getElementById(id);
 
@@ -699,11 +1757,7 @@ let reports = [];
 let claims = [];
 let selectedPhoto = null;
 
-function toast(message) {
-  $("toast").textContent = message;
-  $("toast").classList.add("show");
-  setTimeout(() => $("toast").classList.remove("show"), 3200);
-}
+/* HELPERS */
 
 function safeText(value = "") {
   return String(value).replace(/[&<>"']/g, c => ({
@@ -717,68 +1771,157 @@ function safeText(value = "") {
 
 function dateText(value) {
   if (!value) return "Date not specified";
+
   const d = new Date(value);
-  return Number.isNaN(d.getTime()) ? safeText(value) : d.toLocaleDateString();
+
+  return Number.isNaN(d.getTime())
+    ? safeText(value)
+    : d.toLocaleDateString();
+}
+
+function toast(message) {
+  const element = $("toast");
+
+  element.textContent = message;
+  element.style.display = "block";
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    element.style.display = "none";
+  }, 3000);
 }
 
 function openModal(id) {
-  const modal = $(id);
-  modal.classList.remove("hidden");
-  modal.setAttribute("aria-hidden", "false");
+  $(id).classList.remove("hidden");
 }
 
 function closeModal(id) {
-  const modal = $(id);
-  modal.classList.add("hidden");
-  modal.setAttribute("aria-hidden", "true");
+  $(id).classList.add("hidden");
 }
 
-// --------------------------------------------------
-// AUTHENTICATION MODAL
-// --------------------------------------------------
+/* PAGE NAVIGATION */
+
+function closeSidebar() {
+  $("sidebar").classList.remove("open");
+  $("overlay").classList.remove("show");
+}
+
+function showPage(page) {
+
+  const allowed = [
+    "home",
+    "browse",
+    "report",
+    "myreports",
+    "account",
+    "admin",
+    "about"
+  ];
+
+  if (!allowed.includes(page)) {
+    page = "home";
+  }
+
+  if (
+    (page === "account" || page === "myreports") &&
+    !currentUser
+  ) {
+    setAuthMode("login");
+    openModal("authModal");
+    return;
+  }
+
+  if (page === "admin" && currentRole !== "admin") {
+    toast("Administrator access is required.");
+    return;
+  }
+
+  document.querySelectorAll(".page").forEach(element => {
+    element.classList.toggle(
+      "active",
+      element.id === "page-" + page
+    );
+  });
+
+  document.querySelectorAll(".nav-link").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === page
+    );
+  });
+
+  closeSidebar();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  history.replaceState(null, "", "#" + page);
+}
+
+/* AUTH MODAL */
 
 function setAuthMode(mode) {
+
   authMode = mode;
 
   document.querySelectorAll("[data-auth]").forEach(button => {
-    button.classList.toggle("active", button.dataset.auth === mode);
+    button.classList.toggle(
+      "active",
+      button.dataset.auth === mode
+    );
   });
 
   $("authTitle").textContent =
-    mode === "login" ? "Log in to your account" : "Create your account";
+    mode === "login"
+      ? "Log In to Your Account"
+      : "Create Your Account";
 
-  $("authName").parentElement.classList.toggle("hidden", mode === "login");
+  $("nameGroup").classList.toggle(
+    "hidden",
+    mode === "login"
+  );
+
   $("authSubmit").textContent =
-    mode === "login" ? "Log in" : "Create account";
-
-  $("authPassword").autocomplete =
-    mode === "login" ? "current-password" : "new-password";
+    mode === "login"
+      ? "Log In"
+      : "Create Account";
 
   $("authMessage").textContent = "";
 }
 
-// --------------------------------------------------
-// REPORT TYPE AND PHOTO UPLOAD
-// --------------------------------------------------
+/* REPORT TYPE */
 
 function setReportType(type) {
+
   reportType = type;
 
-  document.querySelectorAll("[data-tab]").forEach(button => {
-    button.classList.toggle("active", button.dataset.tab === type);
+  document.querySelectorAll("[data-type]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.type === type
+    );
   });
 
-  $("dateLabel").textContent = type;
+  $("dateLabel").textContent =
+    type === "lost" ? "Lost" : "Found";
 }
 
+/* PHOTO UPLOAD */
+
 function clearSelectedPhoto() {
+
   selectedPhoto = null;
+
   $("itemPhoto").value = "";
   $("photoPreview").removeAttribute("src");
-  $("photoPreviewWrap").classList.add("hidden");
+  $("previewWrap").classList.add("hidden");
 }
 
 function handlePhotoSelection(event) {
+
   const file = event.target.files?.[0];
 
   if (!file) {
@@ -786,10 +1929,14 @@ function handlePhotoSelection(event) {
     return;
   }
 
-  const allowed = ["image/jpeg", "image/png", "image/webp"];
+  const allowed = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
 
   if (!allowed.includes(file.type)) {
-    toast("Please select a JPG, PNG, or WebP image.");
+    toast("Select a JPG, PNG, or WebP image.");
     clearSelectedPhoto();
     return;
   }
@@ -806,99 +1953,105 @@ function handlePhotoSelection(event) {
 
   reader.onload = () => {
     $("photoPreview").src = reader.result;
-    $("photoPreviewWrap").classList.remove("hidden");
+    $("previewWrap").classList.remove("hidden");
   };
-
-  reader.onerror = () => toast("Could not preview this image.");
 
   reader.readAsDataURL(file);
 }
 
 async function uploadItemPhoto(file) {
-  if (!file) {
-    return { imageUrl: null, imagePath: null };
-  }
 
-  if (!currentUser) {
+  if (!file || !currentUser) {
     throw new Error("Please log in before uploading a photo.");
   }
 
   const extension = {
-    "image/jpeg": "jpg",
-    "image/png": "png",
-    "image/webp": "webp"
+    "image/jpeg":"jpg",
+    "image/png":"png",
+    "image/webp":"webp"
   }[file.type];
 
-  if (!extension) throw new Error("Unsupported image format.");
-  if (file.size > MAX_IMAGE_SIZE) throw new Error("Image must not exceed 5 MB.");
+  if (!extension) {
+    throw new Error("Unsupported image format.");
+  }
 
-  const filePath = `${currentUser.uid}/${crypto.randomUUID()}.${extension}`;
+  if (file.size > MAX_IMAGE_SIZE) {
+    throw new Error("Image must not exceed 5 MB.");
+  }
 
-  const { data, error } = await supabaseClient
+  const filePath =
+    `${currentUser.uid}/${crypto.randomUUID()}.${extension}`;
+
+  const {data,error} = await supabaseClient
     .storage
     .from(IMAGE_BUCKET)
-    .upload(filePath, file, {
-      contentType: file.type,
-      cacheControl: "3600",
-      upsert: false
+    .upload(filePath,file,{
+      contentType:file.type,
+      cacheControl:"3600",
+      upsert:false
     });
 
   if (error) {
     throw new Error("Photo upload failed: " + error.message);
   }
 
-  const { data: publicData } = supabaseClient
+  const {data:publicData} = supabaseClient
     .storage
     .from(IMAGE_BUCKET)
     .getPublicUrl(data.path);
 
   return {
-    imageUrl: publicData.publicUrl,
-    imagePath: data.path
+    imageUrl:publicData.publicUrl,
+    imagePath:data.path
   };
 }
 
-// --------------------------------------------------
-// REPORT DISPLAY
-// --------------------------------------------------
-
-function sortNewestFirst(list) {
-  return list.sort((a, b) => {
-    const at = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
-    const bt = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
-    return bt - at;
-  });
-}
+/* STATISTICS */
 
 function renderStats() {
-  const publicReports = reports.filter(
-    item => item.status === "approved" || item.status === "returned"
+
+  const publicItems = reports.filter(item =>
+    ["approved","returned"].includes(item.status)
   );
 
-  $("statTotal").textContent = publicReports.length;
+  $("totalItems").textContent = publicItems.length;
 
-  $("statLost").textContent = publicReports.filter(
-    item => item.type === "lost" && item.status !== "returned"
-  ).length;
+  $("lostItems").textContent =
+    publicItems.filter(item =>
+      item.type === "lost" &&
+      item.status !== "returned"
+    ).length;
 
-  $("statFound").textContent = publicReports.filter(
-    item => item.type === "found" && item.status !== "returned"
-  ).length;
+  $("foundItems").textContent =
+    publicItems.filter(item =>
+      item.type === "found" &&
+      item.status !== "returned"
+    ).length;
 
-  $("statReturned").textContent = publicReports.filter(
-    item => item.status === "returned"
-  ).length;
+  $("returnedItems").textContent =
+    publicItems.filter(item =>
+      item.status === "returned"
+    ).length;
 }
 
+/* BROWSE ITEMS */
+
 function renderItems() {
+
   const search = $("searchInput").value.trim().toLowerCase();
   const type = $("typeFilter").value;
   const category = $("categoryFilter").value;
 
   const list = reports
-    .filter(item => item.status === "approved" || item.status === "returned")
-    .filter(item => type === "all" || item.type === type)
-    .filter(item => category === "all" || item.category === category)
+    .filter(item =>
+      ["approved","returned"].includes(item.status)
+    )
+    .filter(item =>
+      type === "all" || item.type === type
+    )
+    .filter(item =>
+      category === "all" || item.category === category
+    )
     .filter(item => [
       item.name,
       item.description,
@@ -909,420 +2062,549 @@ function renderItems() {
   $("itemsGrid").innerHTML = list.length
     ? list.map(item => `
       <article class="item-card">
+
         <div class="item-photo">
-          ${item.imageUrl
-            ? `<img src="${safeText(item.imageUrl)}" alt="${safeText(item.name)}" loading="lazy">`
-            : "📦"}
+          ${
+            item.imageUrl
+              ? `<img src="${safeText(item.imageUrl)}" alt="${safeText(item.name)}">`
+              : "📦"
+          }
         </div>
 
         <div class="item-body">
-          <div class="item-top">
-            <span class="pill ${item.status === "returned" ? "returned" : safeText(item.type)}">
-              ${item.status === "returned" ? "Returned" : safeText(item.type)}
-            </span>
-            <span class="item-meta">${safeText(item.category || "Other")}</span>
-          </div>
+
+          <span class="pill">
+            ${item.status === "returned"
+              ? "Returned"
+              : safeText(item.type)}
+          </span>
 
           <h3>${safeText(item.name)}</h3>
-          <p>${safeText(item.description || "No additional description provided.")}</p>
-          <p>📍 ${safeText(item.location || "Location not specified")}</p>
 
-          <div class="item-meta">
-            ${item.type === "lost" ? "Lost" : "Found"} on ${dateText(item.itemDate)}
-          </div>
+          <p>${safeText(item.description || "No description.")}</p>
 
-          ${currentUser &&
+          <p>📍 ${safeText(item.location || "No location")}</p>
+
+          <p>${safeText(item.category || "Other")}</p>
+
+          <p>${dateText(item.itemDate)}</p>
+
+          ${
+            currentUser &&
             item.type === "found" &&
             item.status !== "returned" &&
             item.ownerUid !== currentUser.uid
-              ? `<div class="item-actions">
-                   <button class="btn btn-primary" data-claim="${safeText(item.id)}" type="button">Request to claim</button>
-                 </div>`
-              : ""}
+              ? `
+                <div class="item-actions">
+                  <button
+                    class="btn btn-primary"
+                    data-claim="${safeText(item.id)}"
+                    type="button">
+                    Request to Claim
+                  </button>
+                </div>
+              `
+              : ""
+          }
+
         </div>
+
       </article>
     `).join("")
-    : '<div class="empty-state">No matching approved reports yet. Try another search or filter.</div>';
+    : `<div class="empty-state">
+        No matching approved items found.
+       </div>`;
 
   document.querySelectorAll("[data-claim]").forEach(button => {
+
     button.addEventListener("click", () => {
+
       $("claimItemId").value = button.dataset.claim;
-      $("claimMessage").textContent = "";
       $("claimDetails").value = "";
+      $("claimMessage").textContent = "";
+
       openModal("claimModal");
+
     });
+
   });
 }
 
-// --------------------------------------------------
-// ACCOUNT REPORTS
-// --------------------------------------------------
+/* MY REPORTS */
 
 function renderMyReports() {
+
   if (!currentUser) return;
 
-  const mine = reports.filter(
-    report => report.ownerUid === currentUser.uid
+  const mine = reports.filter(report =>
+    report.ownerUid === currentUser.uid
   );
 
   $("myReports").innerHTML = mine.length
     ? mine.map(report => `
-      <div class="my-report-row">
+      <div class="report-row">
+
         <div>
           <strong>${safeText(report.name)}</strong>
-          <div class="item-meta">
+
+          <p>
             ${safeText(report.type)} ·
             ${safeText(report.status || "pending")} ·
             ${dateText(report.itemDate)}
-          </div>
+          </p>
 
-          ${report.imageUrl
-            ? `<img src="${safeText(report.imageUrl)}" alt="Reported item photo" style="width:90px;height:70px;object-fit:cover;border-radius:8px;margin-top:8px">`
-            : ""}
+          ${
+            report.imageUrl
+              ? `<img
+                  src="${safeText(report.imageUrl)}"
+                  style="width:90px;height:70px;object-fit:cover;border-radius:8px;margin-top:10px"
+                  alt="Reported item">`
+              : ""
+          }
         </div>
 
-        <span class="pill">${safeText(report.status || "pending")}</span>
+        <span class="pill">
+          ${safeText(report.status || "pending")}
+        </span>
+
       </div>
     `).join("")
-    : '<div class="empty-state">You have not submitted any reports yet.</div>';
+    : `<div class="empty-state">
+        You have not submitted any reports yet.
+       </div>`;
 }
 
-// --------------------------------------------------
-// ADMIN DASHBOARD
-// --------------------------------------------------
+/* ADMIN DASHBOARD */
 
 function renderAdminDashboard() {
-  const pending = reports.filter(
-    report => (report.status || "pending") === "pending"
+
+  const pending = reports.filter(report =>
+    (report.status || "pending") === "pending"
   );
 
-  const reviewed = reports.filter(
-    report => ["approved", "rejected", "returned"].includes(report.status)
-  ).length;
-
-  const pendingClaims = claims.filter(
-    claim => (claim.status || "pending") === "pending"
+  const reviewed = reports.filter(report =>
+    ["approved","rejected","returned"].includes(report.status)
   );
 
-  $("adminPendingCount").textContent = pending.length;
-  $("adminReviewedCount").textContent = reviewed;
-  $("adminClaimsCount").textContent = pendingClaims.length;
+  const pendingClaims = claims.filter(claim =>
+    (claim.status || "pending") === "pending"
+  );
+
+  $("pendingCount").textContent = pending.length;
+  $("reviewedCount").textContent = reviewed.length;
+  $("claimsCount").textContent = pendingClaims.length;
 
   $("adminQueue").innerHTML = pending.length
     ? pending.map(report => `
       <div class="admin-row">
+
         <div>
           <strong>${safeText(report.name)}</strong>
-          <div class="item-meta">
+
+          <p>
             ${safeText(report.type)} ·
             ${safeText(report.category || "Other")} ·
-            ${safeText(report.location || "No location")} ·
-            submitted by ${safeText(report.reporterName || "user")}
-          </div>
+            ${safeText(report.location || "No location")}
+          </p>
 
-          ${report.imageUrl
-            ? `<img src="${safeText(report.imageUrl)}" alt="Submitted item photo" style="width:120px;height:90px;object-fit:cover;border-radius:8px;margin-top:8px">`
-            : ""}
+          <p>
+            Submitted by:
+            ${safeText(report.reporterName || "Student")}
+          </p>
 
-          <p class="muted">${safeText(report.description || "No description provided.")}</p>
+          <p>${safeText(report.description || "")}</p>
+
+          ${
+            report.imageUrl
+              ? `<img src="${safeText(report.imageUrl)}"
+                  style="width:120px;max-height:100px;object-fit:cover;border-radius:8px"
+                  alt="Submitted item">`
+              : ""
+          }
         </div>
 
         <div class="item-actions">
-          <button class="btn btn-primary" data-approve="${safeText(report.id)}" type="button">Approve</button>
-          <button class="btn btn-outline" data-reject="${safeText(report.id)}" type="button">Reject</button>
+
+          <button
+            class="btn btn-primary"
+            data-approve="${safeText(report.id)}">
+            Approve
+          </button>
+
+          <button
+            class="btn btn-outline"
+            data-reject="${safeText(report.id)}">
+            Reject
+          </button>
+
         </div>
+
       </div>
     `).join("")
-    : '<div class="empty-state">There are no reports waiting for review.</div>';
+    : `<div class="empty-state">
+        There are no pending reports.
+       </div>`;
 
   $("adminClaims").innerHTML = pendingClaims.length
     ? pendingClaims.map(claim => `
       <div class="admin-row">
+
         <div>
-          <strong>Claim request</strong>
-          <div class="item-meta">
-            Item ID: ${safeText(claim.reportId || "Unknown")} ·
-            Submitted by ${safeText(claim.claimantName || "user")}
-          </div>
-          <p class="muted">${safeText(claim.details || "No identifying details provided.")}</p>
+          <strong>Claim Request</strong>
+
+          <p>
+            Item ID: ${safeText(claim.reportId)}
+          </p>
+
+          <p>
+            Submitted by:
+            ${safeText(claim.claimantName || "Student")}
+          </p>
+
+          <p>${safeText(claim.details || "")}</p>
         </div>
 
         <div class="item-actions">
-          <button class="btn btn-primary" data-claim-approve="${safeText(claim.id)}" type="button">Accept claim</button>
-          <button class="btn btn-outline" data-claim-reject="${safeText(claim.id)}" type="button">Decline</button>
+
+          <button
+            class="btn btn-primary"
+            data-claim-approve="${safeText(claim.id)}">
+            Accept
+          </button>
+
+          <button
+            class="btn btn-outline"
+            data-claim-reject="${safeText(claim.id)}">
+            Decline
+          </button>
+
         </div>
+
       </div>
     `).join("")
-    : '<div class="empty-state">There are no pending claim requests.</div>';
+    : `<div class="empty-state">
+        There are no pending claim requests.
+       </div>`;
 
   document.querySelectorAll("[data-approve]").forEach(button => {
-    button.addEventListener("click", () => {
-      moderateReport(button.dataset.approve, "approved");
-    });
+    button.addEventListener("click", () =>
+      moderateReport(button.dataset.approve,"approved")
+    );
   });
 
   document.querySelectorAll("[data-reject]").forEach(button => {
-    button.addEventListener("click", () => {
-      moderateReport(button.dataset.reject, "rejected");
-    });
+    button.addEventListener("click", () =>
+      moderateReport(button.dataset.reject,"rejected")
+    );
   });
 
   document.querySelectorAll("[data-claim-approve]").forEach(button => {
-    button.addEventListener("click", () => {
-      moderateClaim(button.dataset.claimApprove, "approved");
-    });
+    button.addEventListener("click", () =>
+      moderateClaim(button.dataset.claimApprove,"approved")
+    );
   });
 
   document.querySelectorAll("[data-claim-reject]").forEach(button => {
-    button.addEventListener("click", () => {
-      moderateClaim(button.dataset.claimReject, "rejected");
-    });
+    button.addEventListener("click", () =>
+      moderateClaim(button.dataset.claimReject,"rejected")
+    );
   });
 }
 
-// --------------------------------------------------
-// LOAD FIRESTORE DATA
-// --------------------------------------------------
+/* LOAD FIREBASE DATA */
 
 async function loadReports() {
+
   try {
+
     const publicQuery = query(
-      collection(db, "reports"),
-      where("status", "in", ["approved", "returned"])
+      collection(db,"reports"),
+      where("status","in",["approved","returned"])
     );
 
     const publicSnap = await getDocs(publicQuery);
     const combined = new Map();
 
     publicSnap.docs.forEach(document => {
-      combined.set(document.id, {
-        id: document.id,
+      combined.set(document.id,{
+        id:document.id,
         ...document.data()
       });
     });
 
     if (currentUser) {
+
       if (currentRole === "admin") {
-        const allSnap = await getDocs(collection(db, "reports"));
+
+        const allSnap = await getDocs(collection(db,"reports"));
 
         allSnap.docs.forEach(document => {
-          combined.set(document.id, {
-            id: document.id,
+          combined.set(document.id,{
+            id:document.id,
             ...document.data()
           });
         });
+
       } else {
+
         const mineQuery = query(
-          collection(db, "reports"),
-          where("ownerUid", "==", currentUser.uid)
+          collection(db,"reports"),
+          where("ownerUid","==",currentUser.uid)
         );
 
         const mineSnap = await getDocs(mineQuery);
 
         mineSnap.docs.forEach(document => {
-          combined.set(document.id, {
-            id: document.id,
+          combined.set(document.id,{
+            id:document.id,
             ...document.data()
           });
         });
+
       }
+
     }
 
-    reports = sortNewestFirst([...combined.values()]);
+    reports = [...combined.values()].sort((a,b) => {
+
+      const at = a.createdAt?.toMillis
+        ? a.createdAt.toMillis()
+        : 0;
+
+      const bt = b.createdAt?.toMillis
+        ? b.createdAt.toMillis()
+        : 0;
+
+      return bt-at;
+    });
 
     renderStats();
     renderItems();
     renderMyReports();
 
     if (currentRole === "admin") {
-      const claimsSnap = await getDocs(collection(db, "claims"));
+
+      const claimsSnap = await getDocs(collection(db,"claims"));
 
       claims = claimsSnap.docs.map(document => ({
-        id: document.id,
+        id:document.id,
         ...document.data()
       }));
 
       renderAdminDashboard();
+
     } else {
+
       claims = [];
+
     }
 
-  } catch (error) {
-    console.error("Report loading error:", error);
+  } catch(error) {
+
+    console.error(error);
 
     $("itemsGrid").innerHTML =
-      '<div class="empty-state">Could not load reports. Check your Firestore security rules and database setup.</div>';
+      `<div class="empty-state">
+        Could not load items. Check your Firebase setup and Firestore permissions.
+       </div>`;
 
-    if (currentRole === "admin") {
-      $("adminMessage").textContent =
-        "Admin data could not be loaded. Check Firestore permissions.";
-    }
+    toast("Could not load reports.");
 
-    toast("Could not load reports. Check your Firebase setup.");
   }
+
 }
 
-// --------------------------------------------------
-// REPORT MODERATION
-// --------------------------------------------------
+/* ADMIN MODERATION */
 
-async function moderateReport(id, status) {
+async function moderateReport(id,status) {
+
   if (currentRole !== "admin" || !currentUser) {
     toast("Administrator access is required.");
     return;
   }
 
   try {
-    await updateDoc(doc(db, "reports", id), {
+
+    await updateDoc(doc(db,"reports",id),{
       status,
-      reviewedAt: serverTimestamp(),
-      reviewedBy: currentUser.uid
+      reviewedAt:serverTimestamp(),
+      reviewedBy:currentUser.uid
     });
 
-    toast(`Report ${status}.`);
+    toast("Report " + status + ".");
     await loadReports();
 
-  } catch (error) {
-    console.error("Report moderation error:", error);
-    toast("Unable to update report. Check admin permissions.");
+  } catch(error) {
+
+    console.error(error);
+    toast("Could not update report.");
+
   }
+
 }
 
-async function moderateClaim(id, status) {
+async function moderateClaim(id,status) {
+
   if (currentRole !== "admin" || !currentUser) {
     toast("Administrator access is required.");
     return;
   }
 
   try {
-    await updateDoc(doc(db, "claims", id), {
+
+    await updateDoc(doc(db,"claims",id),{
       status,
-      reviewedAt: serverTimestamp(),
-      reviewedBy: currentUser.uid
+      reviewedAt:serverTimestamp(),
+      reviewedBy:currentUser.uid
     });
 
-    toast(`Claim request ${status}.`);
+    toast("Claim request " + status + ".");
     await loadReports();
 
-  } catch (error) {
-    console.error("Claim moderation error:", error);
-    $("adminMessage").textContent =
-      error.message || "Unable to update claim request. Check Firestore rules.";
+  } catch(error) {
+
+    console.error(error);
+    toast("Could not update claim.");
+
   }
+
 }
 
-// --------------------------------------------------
-// SUBMIT A LOST OR FOUND REPORT
-// --------------------------------------------------
+/* SUBMIT REPORT */
 
 async function submitReport(event) {
+
   event.preventDefault();
 
   if (!currentUser) {
+    setAuthMode("login");
     openModal("authModal");
-    toast("Please log in before submitting a report.");
     return;
   }
 
   const message = $("reportMessage");
-  const submitButton = $("reportForm").querySelector('button[type="submit"]');
+  const submitButton = $("reportForm").querySelector(
+    'button[type="submit"]'
+  );
 
-  message.textContent = "Preparing your report...";
   submitButton.disabled = true;
+  message.textContent = "Preparing your report...";
 
   try {
+
     let uploadedPhoto = null;
 
     if (selectedPhoto) {
-      message.textContent = "Uploading your photo...";
+      message.textContent = "Uploading photo...";
       uploadedPhoto = await uploadItemPhoto(selectedPhoto);
     }
 
-    message.textContent = "Saving your report...";
+    message.textContent = "Saving report...";
 
-    await addDoc(collection(db, "reports"), {
-      type: reportType,
-      name: $("itemName").value.trim(),
-      category: $("itemCategory").value,
-      itemDate: $("itemDate").value,
-      location: $("itemLocation").value.trim(),
-      description: $("itemDescription").value.trim(),
+    await addDoc(collection(db,"reports"),{
 
-      imageUrl: uploadedPhoto?.imageUrl || null,
-      imagePath: uploadedPhoto?.imagePath || null,
+      type:reportType,
+      name:$("itemName").value.trim(),
+      category:$("itemCategory").value,
+      itemDate:$("itemDate").value,
+      location:$("itemLocation").value.trim(),
+      description:$("itemDescription").value.trim(),
 
-      ownerUid: currentUser.uid,
-      reporterName: currentUser.displayName ||
+      imageUrl:uploadedPhoto?.imageUrl || null,
+      imagePath:uploadedPhoto?.imagePath || null,
+
+      ownerUid:currentUser.uid,
+
+      reporterName:
+        currentUser.displayName ||
         currentUser.email?.split("@")[0] ||
         "Student",
 
-      status: "pending",
-      createdAt: serverTimestamp()
+      status:"pending",
+      createdAt:serverTimestamp()
+
     });
 
     $("reportForm").reset();
     clearSelectedPhoto();
 
     message.textContent =
-      "Your report and photo (if attached) were submitted for admin review.";
+      "Your report was submitted for administrator review.";
 
     toast("Report submitted successfully.");
 
     await loadReports();
 
-  } catch (error) {
-    console.error("Report submission error:", error);
+  } catch(error) {
+
+    console.error(error);
+
     message.textContent =
-      error.message || "Could not submit report. Please try again.";
+      error.message || "Could not submit report.";
+
   } finally {
+
     submitButton.disabled = false;
+
   }
+
 }
 
-// --------------------------------------------------
-// SUBMIT CLAIM REQUEST
-// --------------------------------------------------
+/* SUBMIT CLAIM */
 
 async function submitClaim(event) {
+
   event.preventDefault();
 
   if (!currentUser) {
+    setAuthMode("login");
     openModal("authModal");
     return;
   }
 
-  $("claimMessage").textContent = "Sending...";
+  $("claimMessage").textContent = "Sending request...";
 
   try {
-    await addDoc(collection(db, "claims"), {
-      reportId: $("claimItemId").value,
-      claimantUid: currentUser.uid,
-      claimantName: currentUser.displayName ||
+
+    await addDoc(collection(db,"claims"),{
+
+      reportId:$("claimItemId").value,
+      claimantUid:currentUser.uid,
+
+      claimantName:
+        currentUser.displayName ||
         currentUser.email?.split("@")[0] ||
         "Student",
-      details: $("claimDetails").value.trim(),
-      status: "pending",
-      createdAt: serverTimestamp()
+
+      details:$("claimDetails").value.trim(),
+
+      status:"pending",
+      createdAt:serverTimestamp()
+
     });
 
     $("claimForm").reset();
+
     $("claimMessage").textContent =
-      "Your claim request has been sent for review.";
+      "Your claim request has been submitted.";
 
     toast("Claim request sent.");
 
-  } catch (error) {
-    console.error("Claim submission error:", error);
+  } catch(error) {
+
+    console.error(error);
+
     $("claimMessage").textContent =
       error.message || "Could not send claim request.";
+
   }
+
 }
 
-// --------------------------------------------------
-// LOGIN AND REGISTRATION
-// --------------------------------------------------
+/* LOGIN AND REGISTRATION */
 
 async function handleAuth(event) {
+
   event.preventDefault();
 
   $("authMessage").textContent = "Please wait...";
@@ -1332,10 +2614,17 @@ async function handleAuth(event) {
   const password = $("authPassword").value;
 
   try {
+
     if (authMode === "login") {
-      await signInWithEmailAndPassword(auth, email, password);
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
     } else {
+
       const name = $("authName").value.trim();
 
       if (!name) {
@@ -1348,115 +2637,128 @@ async function handleAuth(event) {
         password
       );
 
-      await updateProfile(credential.user, {
-        displayName: name
+      await updateProfile(credential.user,{
+        displayName:name
       });
 
-      await setDoc(doc(db, "users", credential.user.uid), {
-        displayName: name,
-        email: email,
-        role: "student",
-        createdAt: serverTimestamp()
-      });
+      await setDoc(
+        doc(db,"users",credential.user.uid),
+        {
+          displayName:name,
+          email,
+          role:"student",
+          createdAt:serverTimestamp()
+        }
+      );
+
     }
 
     closeModal("authModal");
     $("authForm").reset();
+
     toast("You are signed in.");
 
-  } catch (error) {
-    console.error("Authentication error:", error);
-    $("authMessage").textContent = friendlyAuthError(error);
+  } catch(error) {
+
+    console.error(error);
+
+    const messages = {
+      "auth/invalid-credential":"Incorrect email or password.",
+      "auth/email-already-in-use":"Email already registered.",
+      "auth/weak-password":"Password must have at least 6 characters.",
+      "auth/invalid-email":"Enter a valid email address.",
+      "auth/too-many-requests":"Too many attempts. Try again later."
+    };
+
+    $("authMessage").textContent =
+      messages[error.code] ||
+      error.message ||
+      "Authentication failed.";
 
   } finally {
+
     $("authSubmit").disabled = false;
+
   }
+
 }
 
-function friendlyAuthError(error) {
-  const messages = {
-    "auth/invalid-credential": "Email or password is incorrect.",
-    "auth/user-not-found": "No account was found with this email.",
-    "auth/wrong-password": "Email or password is incorrect.",
-    "auth/email-already-in-use": "This email already has an account.",
-    "auth/weak-password": "Choose a password with at least 6 characters.",
-    "auth/invalid-email": "Please enter a valid email address.",
-    "auth/too-many-requests": "Too many attempts. Please try again later.",
-    "permission-denied": "Firebase blocked this action. Check your Firestore rules."
-  };
-
-  return messages[error.code] || error.message || "Authentication failed.";
-}
-
-// --------------------------------------------------
-// UPDATE ACCOUNT DISPLAY AFTER LOGIN
-// --------------------------------------------------
+/* USER ACCOUNT */
 
 async function setUser(user) {
+
   currentUser = user;
   currentRole = "guest";
 
-  $("adminMessage").textContent = "";
-
   if (user) {
+
     try {
-      const profileRef = doc(db, "users", user.uid);
-      const profileSnap = await getDoc(profileRef);
+
+      const profileSnap = await getDoc(
+        doc(db,"users",user.uid)
+      );
 
       if (profileSnap.exists()) {
+
         const profile = profileSnap.data();
 
-        // A user is an administrator only if the Firestore
-        // profile explicitly assigns the admin role.
-        currentRole = profile.role === "admin" ? "admin" : "student";
+        currentRole =
+          profile.role === "admin"
+            ? "admin"
+            : "student";
 
       } else {
+
         currentRole = "student";
 
-        $("adminMessage").textContent =
-          "Your account is signed in, but its Firestore profile was not found. Please contact the administrator.";
       }
 
-    } catch (error) {
-      console.error("Profile loading error:", error);
+    } catch(error) {
+
+      console.error(error);
       currentRole = "student";
 
-      $("adminMessage").textContent =
-        "Unable to load your account profile. Check your Firestore security rules.";
+      $("accountMessage").textContent =
+        "Unable to load account profile.";
+
     }
+
   }
 
-  const isAdmin = !!user && currentRole === "admin";
+  const isAdmin =
+    !!user && currentRole === "admin";
 
-  $("loginNavBtn").classList.toggle("hidden", !!user);
-  $("logoutBtn").classList.toggle("hidden", !user);
-  $("adminNavBtn").classList.toggle("hidden", !isAdmin);
+  $("openLogin").classList.toggle("hidden",!!user);
+  $("logoutButton").classList.toggle("hidden",!user);
+  $("adminNav").classList.toggle("hidden",!isAdmin);
 
-  $("account").classList.toggle("hidden", !user);
-  $("adminPanel").classList.toggle("hidden", !isAdmin);
+  $("profileButtonName").textContent =
+    user
+      ? user.displayName ||
+        user.email?.split("@")[0] ||
+        "My Profile"
+      : "My Profile";
 
   if (user) {
-    const displayName =
+
+    $("profileName").textContent =
       user.displayName ||
       user.email?.split("@")[0] ||
       "Student";
 
-    $("profileName").textContent = displayName;
-    $("profileDisplayName").textContent = displayName;
-    $("profileEmail").textContent = user.email || "No email available";
-    $("profileRole").textContent = isAdmin ? "Administrator" : "Student";
+    $("profileEmail").textContent =
+      user.email || "No email available";
 
-    if (isAdmin) {
-      toast("Administrator access confirmed.");
-    }
+    $("profileRole").textContent =
+      isAdmin ? "Administrator" : "Student";
 
     await loadReports();
 
   } else {
-    $("profileName").textContent = "";
-    $("profileDisplayName").textContent = "";
-    $("profileEmail").textContent = "";
-    $("profileRole").textContent = "";
+
+    $("profileName").textContent = "—";
+    $("profileEmail").textContent = "—";
+    $("profileRole").textContent = "Guest";
 
     reports = [];
     claims = [];
@@ -1465,88 +2767,209 @@ async function setUser(user) {
     renderItems();
 
     $("myReports").innerHTML =
-      '<div class="empty-state">Log in to view your submitted reports.</div>';
+      `<div class="empty-state">
+        Log in to view your submitted reports.
+       </div>`;
+
+    $("adminQueue").innerHTML =
+      `<div class="empty-state">No reports loaded.</div>`;
+
+    $("adminClaims").innerHTML =
+      `<div class="empty-state">No claims loaded.</div>`;
+
   }
+
 }
 
-// --------------------------------------------------
-// INITIALIZE WEBSITE EVENTS
-// --------------------------------------------------
+/* INITIALIZE WEBSITE */
 
 function init() {
-  $("loginNavBtn").addEventListener("click", () => {
+
+  /* NAVIGATION */
+
+  document.querySelectorAll("[data-page],[data-go]").forEach(button => {
+
+    button.addEventListener("click",() => {
+
+      const page =
+        button.dataset.page ||
+        button.dataset.go;
+
+      showPage(page);
+
+    });
+
+  });
+
+  $("logoHome").addEventListener("click",event => {
+    event.preventDefault();
+    showPage("home");
+  });
+
+  $("menuButton").addEventListener("click",() => {
+
+    $("sidebar").classList.toggle("open");
+    $("overlay").classList.toggle("show");
+
+  });
+
+  $("overlay").addEventListener("click",closeSidebar);
+
+  /* PROFILE MENU */
+
+  $("profileButton").addEventListener("click",() => {
+    $("profileMenu").classList.toggle("hidden");
+  });
+
+  $("openProfile").addEventListener("click",() => {
+
+    $("profileMenu").classList.add("hidden");
+    showPage("account");
+
+  });
+
+  $("openLogin").addEventListener("click",() => {
+
+    $("profileMenu").classList.add("hidden");
+
     setAuthMode("login");
     openModal("authModal");
+
   });
 
-  $("adminNavBtn").addEventListener("click", () => {
-    if (currentRole !== "admin") return;
+  $("logoutButton").addEventListener("click",async() => {
 
-    $("adminPanel").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    try {
+
+      await signOut(auth);
+
+      $("profileMenu").classList.add("hidden");
+
+      toast("You have logged out.");
+
+      showPage("home");
+
+    } catch(error) {
+
+      console.error(error);
+      toast("Could not log out.");
+
+    }
+
   });
 
-  $("closeAuth").addEventListener("click", () => {
+  /* DARK MODE */
+
+  $("themeButton").addEventListener("click",() => {
+
+    const dark = document.body.classList.toggle("dark-mode");
+
+    $("themeButton").textContent =
+      dark ? "☀ Light mode" : "◐ Dark mode";
+
+    try {
+      localStorage.setItem(
+        "omnhs-lost-found-theme",
+        dark ? "dark" : "light"
+      );
+    } catch(error) {}
+
+  });
+
+  try {
+
+    if (
+      localStorage.getItem("omnhs-lost-found-theme") === "dark"
+    ) {
+
+      document.body.classList.add("dark-mode");
+      $("themeButton").textContent = "☀ Light mode";
+
+    }
+
+  } catch(error) {}
+
+  /* AUTHENTICATION */
+
+  $("closeAuth").addEventListener("click",() => {
     closeModal("authModal");
   });
 
-  $("closeClaim").addEventListener("click", () => {
+  $("closeClaim").addEventListener("click",() => {
     closeModal("claimModal");
   });
 
-  $("logoutBtn").addEventListener("click", async () => {
-    try {
-      await signOut(auth);
-      toast("You have logged out.");
-    } catch (error) {
-      console.error("Logout error:", error);
-      toast("Could not log out. Please try again.");
-    }
-  });
-
   document.querySelectorAll("[data-auth]").forEach(button => {
-    button.addEventListener("click", () => {
+
+    button.addEventListener("click",() => {
       setAuthMode(button.dataset.auth);
     });
+
   });
 
-  document.querySelectorAll("[data-tab]").forEach(button => {
-    button.addEventListener("click", () => {
-      setReportType(button.dataset.tab);
+  $("authForm").addEventListener("submit",handleAuth);
+
+  /* REPORTING */
+
+  document.querySelectorAll("[data-type]").forEach(button => {
+
+    button.addEventListener("click",() => {
+      setReportType(button.dataset.type);
     });
+
   });
 
-  $("authForm").addEventListener("submit", handleAuth);
-  $("reportForm").addEventListener("submit", submitReport);
-  $("claimForm").addEventListener("submit", submitClaim);
+  $("reportForm").addEventListener("submit",submitReport);
+  $("claimForm").addEventListener("submit",submitClaim);
 
-  $("itemPhoto").addEventListener("change", handlePhotoSelection);
-  $("removePhoto").addEventListener("click", clearSelectedPhoto);
+  $("itemPhoto").addEventListener("change",handlePhotoSelection);
 
-  $("searchInput").addEventListener("input", renderItems);
-  $("typeFilter").addEventListener("change", renderItems);
-  $("categoryFilter").addEventListener("change", renderItems);
+  $("removePhoto").addEventListener("click",clearSelectedPhoto);
+
+  /* SEARCH AND FILTERS */
+
+  $("searchInput").addEventListener("input",renderItems);
+  $("typeFilter").addEventListener("change",renderItems);
+  $("categoryFilter").addEventListener("change",renderItems);
+
+  /* MODAL BACKGROUND CLICK */
 
   document.querySelectorAll(".modal").forEach(modal => {
-    modal.addEventListener("click", event => {
+
+    modal.addEventListener("click",event => {
+
       if (event.target === modal) {
         closeModal(modal.id);
       }
+
     });
+
   });
 
-  // Register the authentication listener after all page elements exist.
-  onAuthStateChanged(auth, user => {
+  /* INITIAL PAGE */
+
+  const initialPage =
+    location.hash.replace("#","") || "home";
+
+  showPage(initialPage);
+
+  /* FIREBASE LOGIN LISTENER */
+
+  onAuthStateChanged(auth,user => {
+
     setUser(user).catch(error => {
-      console.error("Account initialization error:", error);
-      toast("Could not finish loading your account.");
+
+      console.error(error);
+      toast("Could not load account information.");
+
     });
+
   });
+
 }
 
 init();
+
 </script>
 
 </body>
